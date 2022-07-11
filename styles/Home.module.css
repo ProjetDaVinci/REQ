@@ -73,6 +73,19 @@
   max-width: 800px;
 }
 
+.content-wrapper {
+  box-sizing: border-box;
+  padding: 0 10rem;
+  flex: 1 0 auto;
+}
+
+.global-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 100px;
+  height: 100%;
+}
+
 .card {
   margin: 1rem;
   padding: 1.5rem;

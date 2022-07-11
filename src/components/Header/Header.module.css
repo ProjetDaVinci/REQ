@@ -1,0 +1,22 @@
+.head {
+  padding: 30px;
+  display: flex;
+  border-bottom: 2px solid #8d8d8d8f;
+}
+
+.navigation {
+  display: flex;
+  width: inherit;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+}
+.navigation > a {
+  padding: 0 10px;
+  border-bottom: 2px solid #ffffff00;
+}
+
+.navigation > a:hover {
+  transition: 2s ease;
+  border-bottom: 2px solid #0000008f;
+}

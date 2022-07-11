@@ -1,0 +1,11 @@
+.container {
+  height: 100%;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #28304b 0%, #28304b 100%);
+  border-radius: 12px;
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  padding: 17px 10px;
+}

@@ -4,6 +4,8 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  width: 100%;
+  min-height: 100vh;
 }
 
 a {
@@ -13,4 +15,20 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.content-wrapper {
+  box-sizing: border-box;
+  padding: 0 10rem;
+  flex: 1 0 auto;
+}
+
+.global-wrapper {
+  padding: 11px 8px;
+  background-color: #131a32;
+  display: grid;
+  grid-template-rows: 100% 100px 100%;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 100px;
+  min-height: 100vh;
 }
