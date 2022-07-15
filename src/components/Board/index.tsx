@@ -6,10 +6,14 @@ import { ContainerWrapper } from "./styles";
 const Board = () => {
   return (
     <div className={styles.container}>
-      <div>
+      <div className={styles.container_logo}>
         <Logo />
       </div>
-      Board
+      <div className={styles.content_wrapper}>
+        <div className={styles.content_item_wrapper}>Board</div>
+        <div className={styles.content_item_wrapper}>Board</div>
+        <div className={styles.content_item_wrapper}>Board</div>
+      </div>
     </div>
   );
 };

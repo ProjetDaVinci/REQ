@@ -19,7 +19,7 @@ a {
 
 .content-wrapper {
   box-sizing: border-box;
-  padding: 0 10rem;
+  padding: 11px 38px;
   flex: 1 0 auto;
 }
 
@@ -27,8 +27,8 @@ a {
   padding: 11px 8px;
   background-color: #131a32;
   display: grid;
-  grid-template-rows: 100% 100px 100%;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 100% 100%;
+  grid-template-columns: 250px auto;
   grid-auto-rows: 100px;
   min-height: 100vh;
 }

@@ -1,9 +1,9 @@
-.head {
+.filter_section_wrapper {
   display: flex;
   color: #fff;
   /* border-bottom: 2px solid #8d8d8d8f; */
   justify-content: space-between;
-  margin-bottom: 17px;
+  padding: 6px 20px;
 }
 
 .head_additionaly {

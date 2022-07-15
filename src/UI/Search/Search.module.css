@@ -1,0 +1,23 @@
+.container {
+  height: 42px;
+  width: 173px;
+  /* text-align: center; */
+  display: flex;
+  align-items: center;
+  align-content: center;
+  background-color: transparent;
+  color: #fff;
+  /* display: flex;
+  align-items: center;
+  align-content: center;
+  flex-direction: column; */
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  padding: 15px 11px;
+}
+
+.container > p {
+  margin: 0;
+}
