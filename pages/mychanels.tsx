@@ -1,13 +1,14 @@
 import { NextPage } from "next";
 import React, { useState } from "react";
 import { Cards, Layout } from "../src/components";
+import CardsChanel from "../src/components/CardsChanel";
 
-const ApplicationsPage: NextPage = () => {
+const MyChanelsPage: NextPage = () => {
   return (
     <Layout>
-      <Cards />
+      <CardsChanel />
     </Layout>
   );
 };
 
-export default ApplicationsPage;
+export default MyChanelsPage;

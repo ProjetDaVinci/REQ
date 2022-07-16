@@ -1,1 +1,3 @@
-export type dad = {};
+import { DashboardIcon } from "../../icons";
+
+export type dad = [];

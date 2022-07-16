@@ -1,54 +1,88 @@
+
 .filter_section_wrapper {
   display: flex;
+  flex-direction: row;
+/* border-radius: 12px; */
+  /* justify-content: space-between; */
+  width: fit-content;
+}
+
+
+.filter_section_container {
+  display: flex;
   color: #fff;
-  /* border-bottom: 2px solid #8d8d8d8f; */
+  background-color: #28304B;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 12px;
   justify-content: space-between;
   padding: 6px 20px;
+  width: fit-content;
 }
 
-.head_additionaly {
+
+
+
+.filter_active {
+  display: flex;
+  color: #fff;
+  background-color: #131A32;
+  border: none;
+  border-radius: 12px;
+  justify-content: space-between;
+  padding: 6px 30px;
+  transition: all 0.3s;
+
+}
+
+.filter_section_button {
+  display: flex;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  border-radius: 12px;
+  justify-content: space-between;
+  padding: 6px 30px;
+  opacity: 1;
+  transition: all 0.3s;
+
+}
+
+.filter_section_button:hover {
+  background-color:#354168;
+  transition: all 0.4s;
+}
+
+.filter_section_button:active {
+  background-color:#e91f63;
+  transition: all 0.3s;
+}
+
+.filter_section_delete {
+  margin-left:10px; 
   display: flex;
   align-items: center;
-  align-content: center;
+  justify-self: center;
+  color: #fff;
+  background-color: #28304B;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 12px;
+border: none;
+transition: all 0.3s;
+
 }
 
-.head_additionaly > svg {
-  margin-left: 17px;
+.filter_section_delete:hover {
+  background-color:#354168;
+  transition: all 0.4s;
 }
 
-.section_column {
-  display: flex;
-  flex-direction: column;
+.filter_section_delete:active {
+  background-color:#e91f63;
+  transition: all 0.3s;
 }
 
-.section_text > p {
-  margin: 0;
-}
 
-.home {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  align-content: center;
-}
 
-.home > p {
-  margin: 0;
-  margin-left: 5px;
-}
 
-.navigation {
-  display: flex;
-  width: inherit;
-  align-items: center;
-  justify-content: center;
-  padding: 0 10px;
-}
-.navigation > a {
-  padding: 0 10px;
-}
 
-.navigation > a:hover {
-  transition: 2s ease;
-  border-bottom: 2px solid #0000008f;
-}
+
