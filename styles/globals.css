@@ -6,7 +6,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   width: 100%;
   min-height: 100vh;
-  background-color:#131A32 !important ;
+  background-color: #131a32 !important ;
 }
 
 a {
@@ -34,9 +34,36 @@ a {
   min-height: 100vh;
 }
 
-
-.bg-card{
-  background-color: #28304B !important;
+.bg-card {
+  background-color: #28304b !important;
 }
 
+.text-head-card {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.387234px;
 
+  color: #ffffff;
+}
+
+.text-body-card {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.387234px;
+
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.ml-75 {
+  margin-left: 75px;
+}
+
+.mt-m15 {
+  margin-top: -16px;
+}

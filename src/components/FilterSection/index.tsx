@@ -27,10 +27,6 @@ const FilterSection = () => {
             {value}
           </button>
         ))}
-
-        {/* <Header /> */}
-        {/* {children} */}
-        {/* <Footer /> */}
       </div>
       {data.length !== 0 ? (
         <button className={styles.filter_section_delete} onClick={onDeleteData}>
