@@ -1,4 +1,5 @@
 import { Board, Header, FilterSection } from "..";
+import styles from "./Layout.module.css";
 
 interface IProps {
   children: React.ReactNode;
@@ -6,15 +7,19 @@ interface IProps {
 
 const Layout = ({ children }: IProps) => {
   return (
-    <div className="global-wrapper">
+    <>
       <Board />
-      <div className="content-wrapper">
+      <main className="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <Header />
-        <FilterSection />
-        {children}
-      </div>
+        <div className="container-fluid py-4">
+          <FilterSection />
+          <div className={styles.content_row}>
+            <div className="row">{children}</div>
+          </div>
+        </div>
+      </main>
       {/* <Footer /> */}
-    </div>
+    </>
   );
 };
 

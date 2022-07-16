@@ -6,6 +6,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   width: 100%;
   min-height: 100vh;
+  background-color:#131A32 !important ;
 }
 
 a {
@@ -32,3 +33,10 @@ a {
   grid-auto-rows: 100px;
   min-height: 100vh;
 }
+
+
+.bg-card{
+  background-color: #28304B !important;
+}
+
+

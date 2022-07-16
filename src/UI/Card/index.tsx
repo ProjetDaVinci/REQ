@@ -9,35 +9,75 @@ interface ICard {
   desctext: string;
 }
 
-const Card: FC<ICard> = ({ date, name, desctext }) => {
-  return (
-    <div className={styles.container}>
-      <div className={styles.header}>
+{
+  /* <div classNameNameName={styles.container}>
+      <div classNameNameName={styles.header}>
         <img
           src="Weezy.png"
-          className={styles.image}
+          classNameNameName={styles.image}
           style={{ width: 68, height: 65, borderRadius: 12 }}
         />
-        <div className={styles.header_content}>
+        <div classNameNameName={styles.header_content}>
           <div style={{ marginTop: 5 }}>
-            <p className={styles.header_text}>{name} </p>
-            <p className={styles.header_text}>{date}</p>
+            <p classNameNameName={styles.header_text}>{name} </p>
+            <p classNameNameName={styles.header_text}>{date}</p>
           </div>
 
-          <div className={styles.header_icon}>
+          <div classNameNameName={styles.header_icon}>
             <Close />
             <Like />
             <Dump />
           </div>
         </div>
       </div>
-      <div className={styles.content}>
-        <p className={styles.desc_text}>{desctext}</p>
+      <div classNameNameName={styles.content}>
+        <p classNameNameName={styles.desc_text}>{desctext}</p>
       </div>
-      <div className={styles.footer}>
-        <p className={styles.show_more_text} style={{ textAlign: "end" }}>
+      <div classNameNameName={styles.footer}>
+        <p classNameNameName={styles.show_more_text} style={{ textAlign: "end" }}>
           Показать ещё
         </p>
+      </div>
+    </div> */
+}
+
+const Card: FC<ICard> = ({ date, name, desctext }) => {
+  return (
+    <div className="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div className="card bg-card">
+        <div className="card-header bg-card p-3 pt-2">
+          <div className="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+            <i className="material-icons opacity-10">weekend</i>
+          </div>
+          <div className="text-end pt-1">
+            <p className="text-sm mb-0 text-capitalize">
+              <div className={styles.header_icon}>
+                <Close />
+                <Like />
+                <Dump />
+              </div>
+            </p>
+            <h5 className="mb-0 text-white">$53k</h5>
+          </div>
+        </div>
+        <div className="card-body">
+          {/* <h6 className="mb-0 ">Website Views</h6> */}
+          <p className="text-sm ">Last Campaign Performance</p>
+          <hr className="dark horizontal" />
+          <div className="d-flex ">
+            <i className="material-icons text-sm my-auto me-1">schedule</i>
+            <p className="mb-0 text-sm"> campaign sent 2 days ago </p>
+          </div>
+        </div>
+        <hr className="dark horizontal my-0" />
+        <div className="card-footer p-3">
+          <p className="mb-0">
+            <span className="text-success text-sm font-weight-bolder">
+              +55%{" "}
+            </span>
+            than last week
+          </p>
+        </div>
       </div>
     </div>
   );
