@@ -18,7 +18,7 @@ interface IProps {
 // import "../styles/material-dashboard.css";
 // import "../styles/material-dashboard.css";
 
-function MyApp({ Component, pageProps, session }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
