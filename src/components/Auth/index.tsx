@@ -3,12 +3,26 @@ import { Field, Form } from "react-final-form";
 import Switch from "react-switch";
 import { Facebook, GitHub, Google } from "../../icons";
 import styles from "./Auth.module.css";
+import { signIn, signOut, useSession } from "next-auth/react";
+import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { actions } from "../../redux/ducks";
 
 const AuthComponent = () => {
   const [checked, setChecked] = useState(false);
-  const onSubmit = () => {
+  const dispatch = useDispatch();
+
+  const onSubmit = (email: string, password: string) => {
+    if (email === "admin" && password === "admin") {
+      dispatch(actions.auth.signIn());
+      // signIn();
+      session;
+    }
     window.alert("hey");
   };
+  const { data: session, status } = useSession();
+  console.log("session => ", session);
+  console.log("status => ", status);
 
   return (
     <div className={styles.container}>
@@ -69,14 +83,16 @@ const AuthComponent = () => {
                 </div>
 
                 <div className={styles.auth_container}>
-                  <button
-                    type="submit"
-                    // disabled={submitting}
-                    className={styles.auth_button}
-                  >
-                    Войти
-                  </button>
-
+                  <Link href="/">
+                    <button
+                      type="submit"
+                      // disabled={submitting}
+                      className={styles.auth_button}
+                      // onClick={() => signIn()}
+                    >
+                      Войти
+                    </button>
+                  </Link>
                   <div>
                     <p className={styles.switch_text}>
                       У вас нет аккаунта?{" "}

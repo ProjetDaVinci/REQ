@@ -27,7 +27,7 @@ const cardItem = [
 ];
 const CardsKey = () => {
   return (
-    <div className={styles.content_wrapper}>
+    <>
       {cardItem.map((item, key) => (
         <CardChanel
           date={item.date}
@@ -37,7 +37,7 @@ const CardsKey = () => {
           key={key}
         />
       ))}
-    </div>
+    </>
   );
 };
 

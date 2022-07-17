@@ -65,5 +65,21 @@ a {
 }
 
 .mt-m15 {
-  margin-top: -16px;
+  margin-top: -17px;
+}
+
+
+.p-card{
+  padding: auto;
+}
+
+.hr-card-dark{
+  height: 2px !important;
+background-color: rgba(0, 0, 0, 0.6);
+margin:0;
+margin-top: 18px;
+}
+
+.bg-sidebar {
+  background-image:linear-gradient(180deg, #28304B 0%, #28304B 100%) !important;
 }

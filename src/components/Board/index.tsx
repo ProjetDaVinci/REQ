@@ -11,25 +11,17 @@ import {
 } from "../../icons";
 import styles from "./Board.module.css";
 import { ContainerWrapper } from "./styles";
+import { navigation } from "../../constants";
 
 // import withStyles from "@material-ui/core/styles/withStyles";
 // import Icon from "@material-ui/core/Icon";
-
-const navigation = [
-  { id: 1, title: "Заявки", path: "/", icons: <DashboardIcon /> },
-  { id: 2, title: "Мои каналы", path: "/mychanels", icons: <Wifi /> },
-  { id: 3, title: "Общие каналы", path: "/chanels", icons: <Ethernet /> },
-  { id: 4, title: "Ключевики", path: "/keywords", icons: <Key /> },
-  { id: 5, title: "Тикеты", path: "/tikets", icons: <Calendar /> },
-  { id: 6, title: "Настройки", path: "/settings", icons: <Settings /> },
-];
 
 const Board = () => {
   const { pathname } = useRouter();
 
   return (
     <aside
-      className="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark"
+      className="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-sidebar"
       id="sidenav-main"
     >
       <div className="sidenav-header">
@@ -57,7 +49,7 @@ const Board = () => {
               <li className="nav-item" key={key}>
                 <a
                   className={`nav-link text-white ${
-                    pathname === item.path ? "active bg-gradient-primary" : ""
+                    pathname === item.path ? "bg-gradient-primary" : ""
                   }`}
                 >
                   <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">

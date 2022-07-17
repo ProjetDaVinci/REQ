@@ -23,16 +23,16 @@ const cardItem = [
 ];
 const CardsKey = () => {
   return (
-    <div className={styles.content_wrapper}>
+    <>
       {cardItem.map((item, key) => (
         <CardKey
           date={item.date}
           name={item.name}
           desctext={item.desctext}
-          key={key}
+          key={`${key}_${item.date}`}
         />
       ))}
-    </div>
+    </>
   );
 };
 

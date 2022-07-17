@@ -3,12 +3,22 @@ import Head from "next/head";
 import Image from "next/image";
 import { Cards, Layout } from "../src/components";
 import styles from "../styles/Home.module.css";
+import { signIn, signOut, useSession } from "next-auth/react";
+import AuthComponent from "../src/components/Auth";
+import { useSelector } from "react-redux";
+import { selectors } from "../src/redux/ducks";
 
 const Home: NextPage = () => {
-  return (
+  const { data: session, status } = useSession();
+
+  const token = useSelector(selectors.auth.SelectToken);
+
+  return token?.length !== 0 ? (
     <Layout>
       <Cards />
     </Layout>
+  ) : (
+    <AuthComponent />
   );
 };
 
