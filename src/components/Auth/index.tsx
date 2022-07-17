@@ -16,7 +16,7 @@ const AuthComponent = () => {
     if (email === "admin" && password === "admin") {
       dispatch(actions.auth.signIn());
       // signIn();
-      session;
+      // session;
     }
     window.alert("hey");
   };
