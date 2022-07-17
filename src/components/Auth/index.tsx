@@ -12,12 +12,11 @@ const AuthComponent = () => {
   const [checked, setChecked] = useState(false);
   const dispatch = useDispatch();
 
-  const onSubmit = (email: string, password: string) => {
-    if (email === "admin" && password === "admin") {
-      dispatch(actions.auth.signIn());
-      // signIn();
-      // session;
-    }
+  const onSubmit = () => {
+    dispatch(actions.auth.signIn());
+    // signIn();
+    // session;
+
     window.alert("hey");
   };
   const { data: session, status } = useSession();
