@@ -30,11 +30,7 @@ const Board = () => {
           aria-hidden="true"
           id="iconSidenav"
         ></i>
-        <a
-          className="navbar-brand m-0"
-          href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
-          target="_blank"
-        >
+        <a className="navbar-brand m-0" href="/" target="_blank">
           <Logo />
         </a>
       </div>

@@ -1,3 +1,8 @@
+import { useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectors, thunks } from "../../redux/ducks";
+import { TelegramAkkItem } from "../../redux/ducks/telegramAkk/types";
+import { AppDispatch } from "../../redux/store";
 import CardChanel from "../../UI/CardChanel";
 import CardKey from "../../UI/CardKey";
 import styles from "./Cards.module.css";
@@ -26,16 +31,25 @@ const cardItem = [
   },
 ];
 const CardsKey = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const cardServer = useSelector(selectors.information.SelectInfo);
+
+  let mass: any[] = [];
+
+  console.log("mass", mass);
+
+  useEffect(() => {
+    dispatch(thunks.telegramAkk.getListTelegram());
+    dispatch(thunks.information.getInfoList());
+  }, []);
+
+  console.log("cardServer", cardServer);
+
   return (
     <>
-      {cardItem.map((item, key) => (
-        <CardChanel
-          date={item.date}
-          name={item.name}
-          desctext={item.desctext}
-          subs={item.subs}
-          key={key}
-        />
+      {cardServer?.map((item, key) => (
+        <CardChanel id={item.truba_id} desctext={item.text} key={key} />
       ))}
     </>
   );

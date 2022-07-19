@@ -1,6 +1,8 @@
 export type IAuthResponse = {
-  accessToken: string;
+  token: string;
   user: User;
+  status: boolean;
+  message: string;
 };
 
 export type User = {
@@ -23,6 +25,12 @@ export type User = {
 };
 
 export type IAuthData = {
-  email: string;
-  password: string;
+  login: string;
+  password_hash: string;
+};
+
+export type IAuthReg = {
+  name: string;
+  login: string;
+  password_hash: string;
 };

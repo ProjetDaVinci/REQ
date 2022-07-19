@@ -8,13 +8,13 @@ export const authMiddleware =
   () =>
   (next: Dispatch) =>
   (action: AnyAction): AnyAction => {
-    if (action.payload?.accessToken) {
-      http.setAuthorizationHeader(action.payload.accessToken);
+    if (action.payload?.token) {
+      http.setAuthorizationHeader(action.payload.token);
     }
 
     if (action.type === REHYDRATE) {
-      action.payload?.auth?.accessToken &&
-        http.setAuthorizationHeader(action.payload.auth.accessToken);
+      action.payload?.auth?.token &&
+        http.setAuthorizationHeader(action.payload.auth.token);
     }
 
     if (action.type === actions.auth.signOut.type) {

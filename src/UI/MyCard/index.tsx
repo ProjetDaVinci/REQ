@@ -1,6 +1,6 @@
 import Image from "next/image";
 import * as React from "react";
-import { FC, SVGProps, useState } from "react";
+import { FC, SVGProps } from "react";
 import { useSelector } from "react-redux";
 import { API_URL } from "../../constants";
 import { Close, Draw, Dump, Like, Notification } from "../../icons";
@@ -8,8 +8,11 @@ import { selectors } from "../../redux/ducks";
 import styles from "./Card.module.css";
 
 interface ICard {
-  id: number;
+  date: string;
+  name: string;
   desctext: string;
+  subs: number;
+  photo: string;
 }
 
 {
@@ -45,19 +48,13 @@ interface ICard {
 </div>; */
 }
 
-const CardChanel: FC<ICard> = ({ id, desctext }) => {
-  const [numbersOfItems, setNumbers] = useState(120);
-
-  const telegramCard = useSelector(selectors.telegramAkk.SelectTelegram);
-
-  const filtderTelegram = telegramCard.find((item) => item.id === id);
-
+const MyCard: FC<ICard> = ({ date, name, desctext, subs, photo }) => {
   return (
     <div className="col-xl-4 col-sm-6 mb-xl-5 mb-4">
       <div className="card bg-card">
         <div className="card-header bg-card p-3 pb-1">
           <div className="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-            <img src={`${API_URL}/${filtderTelegram?.photo}`} alt="" />
+            <img src={`${API_URL}/${photo}`} alt="" />
             {/* <Image src={`${API_URL}/${photo}`} layout="fill" /> */}
           </div>
           <div className=" pt-1">
@@ -68,49 +65,31 @@ const CardChanel: FC<ICard> = ({ id, desctext }) => {
               </div>
             </p>
             <div className="mt-m15">
-              <p className="ml-75 mb-0 text-head-card ">
-                {filtderTelegram?.name}
-              </p>
+              <p className="ml-75 mb-0 text-head-card ">{name}</p>
               {/* <p className="ml-75 mb-0 text-head-card ">{date}</p> */}
             </div>
           </div>
         </div>
         <div className="card-body p-4 pt-3 pb-0">
-          <span className="text-body-card">
-            {desctext.slice(0, numbersOfItems)}
-          </span>
+          <span className="text-body-card"> {desctext}</span>
 
           <div className={styles.footer}>
-            {desctext.length > 120 ? (
-              numbersOfItems === 120 ? (
-                <p
-                  className={styles.show_more_text}
-                  style={{ textAlign: "end" }}
-                  onClick={() => setNumbers(desctext.length)}
-                >
-                  Показать ещё
-                </p>
-              ) : (
-                <p
-                  className={styles.show_more_text}
-                  style={{ textAlign: "end" }}
-                  onClick={() => setNumbers(120)}
-                >
-                  Свернуть
-                </p>
-              )
-            ) : null}
-            {/* <p className={styles.show_more_text} style={{ textAlign: "end" }}>
+            <p className={styles.show_more_text} style={{ textAlign: "end" }}>
               Показать ещё
-            </p> */}
+            </p>
             <hr className="hr-card-dark" />
           </div>
         </div>
 
-        <div className="card-footer p-4 pt-2 pb-2"></div>
+        <div className="card-footer p-4 pt-2 pb-2">
+          <p className={`mb-0 ${styles.span_subs}`}>
+            <span className={styles.span_subs}>{subs} </span>
+            подписчиков
+          </p>
+        </div>
       </div>
     </div>
   );
 };
 
-export default CardChanel;
+export default MyCard;

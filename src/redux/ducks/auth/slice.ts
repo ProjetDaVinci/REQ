@@ -1,6 +1,6 @@
 import { IAuthResponse } from "./types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { signIn, signUp } from "./thunks";
+import { registration, login } from "./thunks";
 
 const initialState: IAuthResponse = {} as IAuthResponse;
 
@@ -9,30 +9,28 @@ const AuthSlice = createSlice({
   name: "auth",
   reducers: {
     signOut(state) {
-      if (state.accessToken) {
-        state.accessToken = "";
+      if (state.token) {
+        state.token = "";
       }
-      return state;
-    },
-    signIn(state) {
-      state.accessToken = "dfgdgdfbdknfvdfnjn";
       return state;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(
-      signUp.fulfilled,
+      registration.fulfilled,
       (state, { payload }: PayloadAction<IAuthResponse>) => {
         return payload;
       }
     );
-    builder.addCase(signUp.rejected, () => {
+    builder.addCase(registration.rejected, () => {
       return initialState;
     });
     builder.addCase(
-      signIn.fulfilled,
+      login.fulfilled,
       (state, { payload }: PayloadAction<IAuthResponse>) => {
-        return payload;
+        if (payload) {
+          return payload;
+        }
       }
     );
   },

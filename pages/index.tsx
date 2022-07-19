@@ -13,7 +13,7 @@ const Home: NextPage = () => {
 
   const token = useSelector(selectors.auth.SelectToken);
 
-  return token?.length !== 0 ? (
+  return token ? (
     <Layout>
       <Cards />
     </Layout>

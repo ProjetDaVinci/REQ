@@ -3,108 +3,207 @@ import { Field, Form } from "react-final-form";
 import Switch from "react-switch";
 import { Facebook, GitHub, Google } from "../../icons";
 import styles from "./Auth.module.css";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import { actions } from "../../redux/ducks";
+import { actions, selectors, thunks } from "../../redux/ducks";
+import { IAuthData, IAuthReg } from "../../redux/ducks/auth/types";
+import { AppDispatch } from "../../redux/store";
+import { useSelector } from "react-redux";
 
 const AuthComponent = () => {
   const [checked, setChecked] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const onSubmit = () => {
-    dispatch(actions.auth.signIn());
-    // signIn();
-    // session;
+  const resServer = useSelector(selectors.auth.resServer);
+  // console.log("resServer2", resServer);
 
-    window.alert("hey");
+  const onSignin = (user: IAuthData) => {
+    const { password_hash, login } = user;
+
+    if (login === "" && password_hash === "") {
+      window.alert("Заполните необходимые поля");
+    } else {
+      dispatch(thunks.auth.login(user));
+      if (resServer.status === false) {
+        window.alert(resServer.message);
+
+        console.log("resServer", resServer);
+      }
+    }
   };
-  const { data: session, status } = useSession();
-  console.log("session => ", session);
-  console.log("status => ", status);
+
+  const onReg = (infoReg: IAuthReg) => {
+    const { name, login, password_hash } = infoReg;
+
+    if (login === "" && password_hash === "" && name === "") {
+      window.alert("Заполните необходимые поля");
+    } else {
+      console.log("infoReg", infoReg);
+
+      // dispatch(thunks.auth.registration(infoReg));
+      console.log("resServer2", resServer);
+    }
+  };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.content_wrapper}>
-        <div className={styles.head_container}>
-          <p className={styles.head_text}>Войти</p>
-          <div className={styles.head_icons_container}>
-            <Facebook />
-
-            <GitHub />
-            <Google />
-          </div>
-        </div>
-        <div className={styles.form_container}>
-          <Form
-            onSubmit={onSubmit}
-            render={({ handleSubmit, form }) => (
-              <form onSubmit={handleSubmit}>
-                <Field name="email">
-                  {({ input, meta }) => (
-                    <div>
-                      <input
-                        {...input}
-                        type="Email"
-                        placeholder="Email"
-                        className={styles.form_input}
-                      />
-                      {meta.error && meta.touched && <span>{meta.error}</span>}
+    <div className="section">
+      <div className="container">
+        <div className="row full-height justify-content-center">
+          <div className="col-12 text-center align-self-center py-5">
+            <div className={`section pb-5 pt-5 pt-sm-2 text-center`}>
+              <h6 className="mb-0 pb-3">
+                <label
+                  htmlFor="reg-log"
+                  onClick={() => setChecked(false)}
+                  className={checked === false ? "span_active" : ""}
+                >
+                  <span>Войти </span>
+                </label>
+                <label
+                  htmlFor="reg-log"
+                  id="reg-log"
+                  onClick={() => setChecked(true)}
+                  className={checked === true ? "span_active" : ""}
+                >
+                  <span>Зарегистрироваться </span>
+                </label>
+              </h6>
+              <input
+                className="checkbox"
+                type="checkbox"
+                id="reg-log"
+                name="reg-log"
+                checked={checked}
+              />
+              {/* <label htmlFor="reg-log"></label> */}
+              <div className="card-3d-wrap mx-auto">
+                <div className="card-3d-wrapper">
+                  <div className="card-front">
+                    <div className="center-wrap">
+                      <div className={`section text-center `}>
+                        <h4 className="mb-4 pb-3 text-white text">Войти</h4>
+                        <Form
+                          onSubmit={onSignin}
+                          render={({ handleSubmit, form }) => (
+                            <form onSubmit={handleSubmit}>
+                              <Field name="email">
+                                {({ input, meta }) => (
+                                  <div>
+                                    <input
+                                      {...input}
+                                      type="Email"
+                                      placeholder="Email"
+                                      className={`${styles.form_input} mt-2`}
+                                    />
+                                    {meta.error && meta.touched && (
+                                      <span>{meta.error}</span>
+                                    )}
+                                  </div>
+                                )}
+                              </Field>
+                              <Field name="password">
+                                {({ input, meta }) => (
+                                  <div>
+                                    <input
+                                      {...input}
+                                      type="password"
+                                      placeholder="Пароль"
+                                      className={`${styles.form_input} mt-2`}
+                                    />
+                                    {meta.error && meta.touched && (
+                                      <span>{meta.error}</span>
+                                    )}
+                                  </div>
+                                )}
+                              </Field>
+                              <button
+                                type="submit"
+                                // disabled={submitting}
+                                className="btn mt-4 bg-gradient-primary"
+                                onClick={handleSubmit}
+                              >
+                                Войти
+                              </button>
+                            </form>
+                          )}
+                        />
+                      </div>
                     </div>
-                  )}
-                </Field>
-                <Field name="password">
-                  {({ input, meta }) => (
-                    <div>
-                      <input
-                        {...input}
-                        type="password"
-                        placeholder="Current password"
-                        className={styles.form_input}
-                      />
-                      {meta.error && meta.touched && <span>{meta.error}</span>}
+                  </div>
+                  <div className="card-back">
+                    <div className="center-wrap">
+                      <div className={`section text-center`}>
+                        <h4 className="mb-4 pb-3 text-white text">
+                          Зарегистрироваться
+                        </h4>
+                        <Form
+                          onSubmit={onReg}
+                          render={({ handleSubmit, form }) => (
+                            <form onSubmit={handleSubmit}>
+                              <Field name="name">
+                                {({ input, meta }) => (
+                                  <div>
+                                    <input
+                                      {...input}
+                                      type="name"
+                                      placeholder="Имя"
+                                      className={`${styles.form_input}`}
+                                    />
+                                    {meta.error && meta.touched && (
+                                      <span>{meta.error}</span>
+                                    )}
+                                  </div>
+                                )}
+                              </Field>
+                              <Field name="email">
+                                {({ input, meta }) => (
+                                  <div>
+                                    <input
+                                      {...input}
+                                      type="Email"
+                                      placeholder="Email"
+                                      className={`${styles.form_input}`}
+                                    />
+                                    {meta.error && meta.touched && (
+                                      <span>{meta.error}</span>
+                                    )}
+                                  </div>
+                                )}
+                              </Field>
+                              <Field name="password">
+                                {({ input, meta }) => (
+                                  <div>
+                                    <input
+                                      {...input}
+                                      type="password"
+                                      placeholder="Пароль"
+                                      className={`${styles.form_input}`}
+                                    />
+                                    {meta.error && meta.touched && (
+                                      <span>{meta.error}</span>
+                                    )}
+                                  </div>
+                                )}
+                              </Field>
+                              <button
+                                type="submit"
+                                // disabled={submitting}
+                                className="btn mt-4 bg-gradient-primary"
+                                onClick={handleSubmit}
+                              >
+                                Зарегистрироваться
+                              </button>
+                            </form>
+                          )}
+                        />
+                      </div>
                     </div>
-                  )}
-                </Field>
-                <div className={styles.row_container}>
-                  <Switch
-                    onChange={() => setChecked(!checked)}
-                    checked={checked}
-                    uncheckedIcon={false}
-                    checkedIcon={false}
-                    activeBoxShadow="0 0 2px 3px #3bf"
-                    handleDiameter={20}
-                    height={15}
-                    width={30}
-                    boxShadow="0px 2px 6px rgba(0, 0, 0, 0.25)"
-                  />
-                  <p className={styles.switch_text}>Запомнить меня</p>
-                </div>
-
-                <div className={styles.auth_container}>
-                  <Link href="/">
-                    <button
-                      type="submit"
-                      // disabled={submitting}
-                      className={styles.auth_button}
-                      // onClick={() => signIn()}
-                    >
-                      Войти
-                    </button>
-                  </Link>
-                  <div>
-                    <p className={styles.switch_text}>
-                      У вас нет аккаунта?{" "}
-                      <a href="" className={styles.auth_href}>
-                        Зарегистрироваться
-                      </a>
-                    </p>
                   </div>
                 </div>
-                {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
-              </form>
-            )}
-          />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

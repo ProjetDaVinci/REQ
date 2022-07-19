@@ -16,7 +16,7 @@ export const navigation = [
   { id: 6, title: "Настройки", path: "/settings", icons: <Settings /> },
 ];
 
-export const API_URL = "";
-export const SIGN_UP_URL = "auth/sign_up";
-export const SIGN_IN_URL = "auth/sign_in";
+export const API_URL = "https://api.teo-req.ru";
+export const SIGN_UP_URL = "/user/reg";
+export const SIGN_IN_URL = "/user/login";
 export const emailPattern = "^(.+)@(.+)$";

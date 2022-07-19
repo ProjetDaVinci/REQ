@@ -1,12 +1,11 @@
 import { NextPage } from "next";
 import React, { useState } from "react";
-import { Cards, Layout } from "../src/components";
-import CardsChanel from "../src/components/CardsChanel";
+import { Cards, Layout, MyCardsChanel } from "../src/components";
 
 const MyChanelsPage: NextPage = () => {
   return (
     <Layout>
-      <CardsChanel />
+      <MyCardsChanel />
     </Layout>
   );
 };
