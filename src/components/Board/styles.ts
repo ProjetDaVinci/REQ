@@ -10,4 +10,5 @@ export const ContainerWrapper = styled.div`
   // justify-content: space-between;
   // align-items: center;
   // background: #ff9a9a;
+  
 `;
