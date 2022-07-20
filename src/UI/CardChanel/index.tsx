@@ -46,7 +46,7 @@ interface ICard {
 }
 
 const CardChanel: FC<ICard> = ({ id, desctext }) => {
-  const [numbersOfItems, setNumbers] = useState(120);
+  const [numbersOfItems, setNumbers] = useState(80);
 
   const telegramCard = useSelector(selectors.telegramAkk.SelectTelegram);
 
@@ -57,7 +57,11 @@ const CardChanel: FC<ICard> = ({ id, desctext }) => {
       <div className="card bg-card">
         <div className="card-header bg-card p-3 pb-1">
           <div className="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-            <img src={`${API_URL}/${filtderTelegram?.photo}`} alt="" />
+            <img
+              src={`https://app.teo-req.ru/${filtderTelegram?.photo}`}
+              style={{ width: 64, height: 64, borderRadius: 12 }}
+              alt=""
+            />
             {/* <Image src={`${API_URL}/${photo}`} layout="fill" /> */}
           </div>
           <div className=" pt-1">
@@ -67,7 +71,7 @@ const CardChanel: FC<ICard> = ({ id, desctext }) => {
                 <Dump />
               </div>
             </p>
-            <div className="mt-m15">
+            <div className="mt-m15 mh-16">
               <p className="ml-75 mb-0 text-head-card ">
                 {filtderTelegram?.name}
               </p>
@@ -76,13 +80,15 @@ const CardChanel: FC<ICard> = ({ id, desctext }) => {
           </div>
         </div>
         <div className="card-body p-4 pt-3 pb-0">
-          <span className="text-body-card">
-            {desctext.slice(0, numbersOfItems)}
-          </span>
+          <div className="text-body-card-wrapper">
+            <span className="text-body-card">
+              {desctext.slice(0, numbersOfItems)}
+            </span>
+          </div>
 
           <div className={styles.footer}>
-            {desctext.length > 120 ? (
-              numbersOfItems === 120 ? (
+            {desctext.length > 80 ? (
+              numbersOfItems === 80 ? (
                 <p
                   className={styles.show_more_text}
                   style={{ textAlign: "end" }}
@@ -94,7 +100,7 @@ const CardChanel: FC<ICard> = ({ id, desctext }) => {
                 <p
                   className={styles.show_more_text}
                   style={{ textAlign: "end" }}
-                  onClick={() => setNumbers(120)}
+                  onClick={() => setNumbers(80)}
                 >
                   Свернуть
                 </p>

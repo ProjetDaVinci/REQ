@@ -115,6 +115,15 @@ span:active{color: red;
 }
 
 
+.text-body-card-wrapper{
+  min-height: 45px;
+}
+
+.mh-16{
+  max-height: 16px;
+}
+
+
 
 .link {
   color: #c4c3ca;

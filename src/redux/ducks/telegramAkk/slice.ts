@@ -9,7 +9,35 @@ const initialState: TelegramAkkRes = {} as TelegramAkkRes;
 const telegramAkk = createSlice({
   initialState,
   name: "telegramAkk",
-  reducers: {},
+  reducers: {
+    deleteFilter(state, { payload }: PayloadAction<{ id: number }>) {
+      if (payload) {
+        state.data.map((item) => item.id !== payload.id);
+        return state;
+
+        // const findObj = state.find(
+        //   (item) => item.namePage === payload.namePage
+        // );
+        // console.log("findObj", findObj);
+
+        // if (findObj) {
+        //   findObj.mass = [];
+        //   // let mass = findObj.mass;
+        //   // const newArr = mass.find((item) => item.name !== payload.itemName);
+        //   console.log("СРАБОТАЛА удаление");
+
+        //   // if (newArr) {
+        //   //   // mass = newArr;
+        //   //   // return state;
+        //   // }
+        // }
+      }
+      // if (state.accessToken) {
+      //   state.accessToken = "";
+      // }
+      return state;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(
       getListTelegram.fulfilled,

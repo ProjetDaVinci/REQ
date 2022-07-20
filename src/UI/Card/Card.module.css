@@ -39,7 +39,7 @@ border-radius: 12px;
   font-family: 'Open Sans',sans-serif;
 font-style: normal;
 font-weight: 700;
-font-size: 12px;
+font-size: 16px;
 line-height: 16px;
 letter-spacing: -0.387234px;
 
@@ -47,6 +47,7 @@ color: #FFFFFF;
 margin: 0;
 /* margin-left: 70px; */
 }
+
 
 
 .show_more_text {
@@ -58,6 +59,10 @@ line-height: 16px;
 letter-spacing: -0.387234px;
 color: #FFFFFF;
 margin: 0;
+}
+
+.show_more_text_non {
+height:16px;
 }
 
 .image {

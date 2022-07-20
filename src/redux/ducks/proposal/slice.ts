@@ -2,18 +2,18 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { navigation } from "../../../constants";
 import _ from "lodash";
 import { getProposalList } from "./thunks";
-import { KlyuchevikiRes } from "./types";
+import { ProposalRes } from "./types";
 
-const initialState: KlyuchevikiRes = {} as KlyuchevikiRes;
+const initialState: ProposalRes = {} as ProposalRes;
 
-const myChanels = createSlice({
+const proposal = createSlice({
   initialState,
-  name: "myChanels",
+  name: "proposal",
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(
       getProposalList.fulfilled,
-      (state, { payload }: PayloadAction<KlyuchevikiRes>) => {
+      (state, { payload }: PayloadAction<ProposalRes>) => {
         return payload;
       }
     );
@@ -23,7 +23,7 @@ const myChanels = createSlice({
   },
 });
 
-const reducer = myChanels.reducer;
-const actions = { ...myChanels.actions };
+const reducer = proposal.reducer;
+const actions = { ...proposal.actions };
 
 export { reducer, actions };

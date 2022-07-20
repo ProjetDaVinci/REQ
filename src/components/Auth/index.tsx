@@ -10,10 +10,12 @@ import { actions, selectors, thunks } from "../../redux/ducks";
 import { IAuthData, IAuthReg } from "../../redux/ducks/auth/types";
 import { AppDispatch } from "../../redux/store";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 const AuthComponent = () => {
   const [checked, setChecked] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
+  const router = useRouter();
 
   const resServer = useSelector(selectors.auth.resServer);
   // console.log("resServer2", resServer);
@@ -25,6 +27,7 @@ const AuthComponent = () => {
       window.alert("Заполните необходимые поля");
     } else {
       dispatch(thunks.auth.login(user));
+      router.push("/");
       if (resServer.status === false) {
         window.alert(resServer.message);
 

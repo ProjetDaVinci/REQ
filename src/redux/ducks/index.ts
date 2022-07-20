@@ -6,6 +6,7 @@ import * as myChanels from "./myChanels";
 import * as proposal from "./proposal";
 import * as information from "./information";
 import * as telegramAkk from "./telegramAkk";
+import * as filterPages from "./filterPages";
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -15,6 +16,7 @@ export const rootReducer = combineReducers({
   proposal: proposal.reducer,
   information: information.reducer,
   telegramAkk: telegramAkk.reducer,
+  filterPages: filterPages.reducer,
 });
 
 export const actions = {
@@ -25,6 +27,7 @@ export const actions = {
   proposal: proposal.actions,
   information: information.actions,
   telegramAkk: telegramAkk.actions,
+  filterPages: filterPages.actions,
 };
 
 export const selectors = {
@@ -35,6 +38,7 @@ export const selectors = {
   proposal: proposal.selectors,
   information: information.selectors,
   telegramAkk: telegramAkk.selectors,
+  filterPages: filterPages.selectors,
 };
 
 export const thunks = {

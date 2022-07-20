@@ -38,8 +38,9 @@ export default MyApp;
 function Auth({ children }: IProps) {
   // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
   const { status } = useSession({ required: true });
+  const token = useSelector(selectors.auth.SelectToken);
 
-  if (status === "loading") {
+  if (token === undefined) {
     return <div>Loading...</div>;
   }
 

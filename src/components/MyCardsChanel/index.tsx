@@ -34,14 +34,13 @@ const MyCardsChanel = () => {
 
   useEffect(() => {
     dispatch(thunks.telegramAkk.getListTelegram());
-  }, [cardServer]);
-
-  console.log("cardServer2", cardServer);
+  }, []);
 
   return (
     <>
       {cardServer?.map((item, key) => (
         <MyCard
+          id={item.id}
           date={item.create_at}
           name={item.name}
           desctext={item.description}

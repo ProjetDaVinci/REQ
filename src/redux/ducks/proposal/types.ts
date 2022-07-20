@@ -1,10 +1,16 @@
-export type KlyuchevikiItem = {
+export type ProposalItem = {
   id: number;
-  name: string;
-  stopword: string;
-  word: string;
+  create_at: string;
+  estimation: string;
+  group_id: number;
+  status: string;
   company_id: number;
-  exclude: string;
+  message_id: number;
+  qr: string;
+  text: string;
+  truba_id: number;
+  zametki: string;
+  found: string;
 };
 
-export type KlyuchevikiRes = { count: number; data: [] };
+export type ProposalRes = { count: number; data: ProposalItem[] };

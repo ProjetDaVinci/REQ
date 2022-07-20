@@ -17,21 +17,22 @@ const FilterSection = () => {
 
   const onClickCategory = (key: number, item: string) => {
     setCategoryid(key);
-    onAdd(item);
+    dispatch(actions.filterPages.selectFilter(item));
+    // onAdd(item);
   };
 
-  const onAdd = (text: string) => {
-    dispatch(
-      actions.filterPage.addFilter({
-        namePage: headers?.path || "путь",
-        itemName: text,
-      })
-    );
-  };
+  // const onAdd = (text: string) => {
+  //   dispatch(
+  //     actions.filterPage.addFilter({
+  //       namePage: headers?.path || "путь",
+  //       itemName: text,
+  //     })
+  //   );
+  // };
 
-  const onDeleteData = () => {
-    dispatch(actions.filterPage.deleteFilter({ namePage: "text" }));
-  };
+  // const onDeleteData = () => {
+  //   dispatch(actions.filterPage.deleteFilter({ namePage: "text" }));
+  // };
   return headers?.path === "/tikets" ? (
     <div className={styles.filter_section_wrapper}>
       <div className={styles.filter_section_container}>
@@ -49,7 +50,7 @@ const FilterSection = () => {
         ))}
       </div>
     </div>
-  ) : (
+  ) : headers?.path === "/" ? (
     <div className={styles.filter_section_wrapper}>
       <div className={styles.filter_section_container}>
         {data.map((value, key) => (
@@ -67,14 +68,14 @@ const FilterSection = () => {
         ))}
       </div>
       {data.length !== 0 ? (
-        <button className={styles.filter_section_delete} onClick={onDeleteData}>
+        <button className={styles.filter_section_delete}>
           Удалить все заявки в списке
         </button>
       ) : (
         <></>
       )}
     </div>
-  );
+  ) : null;
 };
 
 export default FilterSection;

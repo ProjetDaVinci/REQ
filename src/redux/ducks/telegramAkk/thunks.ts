@@ -16,18 +16,15 @@ export const getListTelegram = createAsyncThunk(
   }
 );
 
-export const deleteKeys = createAsyncThunk(
-  "/klyucheviki/delete",
+export const deleteTelegram = createAsyncThunk(
+  "/telegram/delete",
   async (keyId: number) => {
-    console.log("klyucheviki", keyId);
+    console.log("/telegram/delete", keyId);
 
-    // const { data }: AxiosResponse = await http.delete(
-    //   "/klyucheviki/delete",
-    //   {id: keyId}
-    // );
+    const { data }: AxiosResponse = await http.delete("/telegram/delete", {
+      data: { id: keyId },
+    });
 
-    // console.log("klyucheviki", data);
-
-    // return data;
+    console.log("/telegram/delete", data);
   }
 );

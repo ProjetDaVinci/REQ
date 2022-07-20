@@ -10,7 +10,7 @@ export const getProposalList = createAsyncThunk(
       offset: 0,
     });
 
-    console.log("/subscriber/get-list", data);
+    console.log("/proposal/get-list", data);
 
     return data;
   }
