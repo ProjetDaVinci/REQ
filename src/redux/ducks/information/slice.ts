@@ -6,10 +6,21 @@ import { InformationRes } from "./types";
 
 const initialState: InformationRes = {} as InformationRes;
 
-const myChanels = createSlice({
+const info = createSlice({
   initialState,
-  name: "myChanels",
-  reducers: {},
+  name: "info",
+  reducers: {
+    deleteInfo(state, { payload }: PayloadAction<number>) {
+      const index = state.data.findIndex((n) => n.id === payload);
+      if (payload) {
+        if (index !== -1) {
+          state.data.splice(index, 1);
+          return state;
+        }
+      }
+      return state;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(
       getInfoList.fulfilled,
@@ -23,7 +34,7 @@ const myChanels = createSlice({
   },
 });
 
-const reducer = myChanels.reducer;
-const actions = { ...myChanels.actions };
+const reducer = info.reducer;
+const actions = { ...info.actions };
 
 export { reducer, actions };

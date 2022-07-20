@@ -16,17 +16,26 @@ export const getProposalList = createAsyncThunk(
   }
 );
 
-export const deleteKeys = createAsyncThunk(
-  "/klyucheviki/delete",
-  async (keyId: number) => {
-    console.log("klyucheviki", keyId);
+export const updateProposal = createAsyncThunk(
+  "/proposal/update",
+  async (item: { id: number; status: string }) => {
+    const { data }: AxiosResponse = await http.put("/proposal/update", item);
 
-    // const { data }: AxiosResponse = await http.delete(
-    //   "/klyucheviki/delete",
-    //   {id: keyId}
-    // );
+    console.log("/proposal/update", data);
 
-    // console.log("klyucheviki", data);
+    // return data;
+  }
+);
+
+export const deleteProposal = createAsyncThunk(
+  "/proposal/delete",
+  async (id: number) => {
+    const { data }: AxiosResponse = await http.delete("/proposal/delete", {
+      data: { id },
+    });
+
+    console.log("/proposal/delete", data);
+    console.log("/proposal/delete", id);
 
     // return data;
   }

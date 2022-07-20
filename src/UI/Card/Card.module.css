@@ -59,11 +59,18 @@ line-height: 16px;
 letter-spacing: -0.387234px;
 color: #FFFFFF;
 margin: 0;
+cursor: pointer;
 }
 
 .show_more_text_non {
 height:16px;
 }
+
+
+.show_more_text:active {
+color: red;
+  }
+  
 
 .image {
   position: absolute;

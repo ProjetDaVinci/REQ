@@ -10,6 +10,16 @@ const telegramAkk = createSlice({
   initialState,
   name: "telegramAkk",
   reducers: {
+    deleteTelegram(state, { payload }: PayloadAction<number>) {
+      const index = state.data.findIndex((n) => n.id === payload);
+      if (payload) {
+        if (index !== -1) {
+          state.data.splice(index, 1);
+          return state;
+        }
+      }
+      return state;
+    },
     deleteFilter(state, { payload }: PayloadAction<{ id: number }>) {
       if (payload) {
         state.data.map((item) => item.id !== payload.id);

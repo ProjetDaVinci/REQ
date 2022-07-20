@@ -3,7 +3,7 @@ import { Field, Form } from "react-final-form";
 import Switch from "react-switch";
 import { Facebook, GitHub, Google } from "../../icons";
 import styles from "./Auth.module.css";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { actions, selectors, thunks } from "../../redux/ducks";
@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 
 const AuthComponent = () => {
   const [checked, setChecked] = useState(false);
+  const [checkedBox, setCheckedBox] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
 
@@ -80,12 +81,20 @@ const AuthComponent = () => {
                 checked={checked}
               />
               {/* <label htmlFor="reg-log"></label> */}
-              <div className="card-3d-wrap mx-auto">
+              <div className="card-3d-wrap mx-auto mt-80">
                 <div className="card-3d-wrapper">
                   <div className="card-front">
+                    <div className={styles.head_container}>
+                      <p className={styles.head_text}>Войти</p>
+                      <div className={styles.head_icons_container}>
+                        <Facebook />
+
+                        <GitHub />
+                        <Google />
+                      </div>
+                    </div>
                     <div className="center-wrap">
                       <div className={`section text-center `}>
-                        <h4 className="mb-4 pb-3 text-white text">Войти</h4>
                         <Form
                           onSubmit={onSignin}
                           render={({ handleSubmit, form }) => (
@@ -120,6 +129,25 @@ const AuthComponent = () => {
                                   </div>
                                 )}
                               </Field>
+                              {!checked && (
+                                <div className={styles.row_container}>
+                                  <Switch
+                                    onChange={() => setCheckedBox(!checkedBox)}
+                                    checked={checkedBox}
+                                    uncheckedIcon={false}
+                                    checkedIcon={false}
+                                    activeBoxShadow="0 0 2px 3px #3bf"
+                                    handleDiameter={20}
+                                    height={15}
+                                    width={30}
+                                    boxShadow="0px 2px 6px rgba(0, 0, 0, 0.25)"
+                                  />
+                                  <p className={styles.switch_text}>
+                                    Запомнить меня
+                                  </p>
+                                </div>
+                              )}
+
                               <button
                                 type="submit"
                                 // disabled={submitting}

@@ -31,15 +31,11 @@ const Cards = () => {
 
   const cardServer = useSelector(selectors.proposal.SelectPoposal);
   const filter = useSelector(selectors.filterPages.SelectFilter);
-  console.log("====================================");
-  console.log("filter", filter);
-  console.log("====================================");
-  const filtredItems = cardServer.filter(
-    (item) => item.status === filter.namePage
+
+  let filtredItems = cardServer.filter(
+    (item) => item.status === (filter?.namePage ? filter.namePage : "Новая")
   );
-  console.log("====================================");
-  console.log(filtredItems);
-  console.log("====================================");
+
   useEffect(() => {
     dispatch(thunks.proposal.getProposalList());
   }, []);
@@ -48,7 +44,8 @@ const Cards = () => {
     <>
       {filtredItems?.map((item, key) => (
         <Card
-          id={item.truba_id}
+          idTrub={item.truba_id}
+          id={item.id}
           date={item.create_at}
           status={item.status}
           desctext={item.text}

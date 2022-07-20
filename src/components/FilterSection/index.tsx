@@ -1,15 +1,17 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Board, Header } from "..";
 import { navigation } from "../../constants";
-import { actions } from "../../redux/ducks";
+import { actions, selectors } from "../../redux/ducks";
 import { data, dataTikets } from "./data";
 import styles from "./FilterSection.module.css";
 
 const FilterSection = () => {
   const dispatch = useDispatch();
-  const [categoryId, setCategoryid] = useState(0);
+  const filterGlobal = useSelector(selectors.filterPages.SelectFilter);
+  const index = data.findIndex((value) => value === filterGlobal.namePage);
+  const [categoryId, setCategoryid] = useState(index || 0);
 
   const { pathname } = useRouter();
 

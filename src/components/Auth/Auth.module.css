@@ -29,10 +29,11 @@
 .head_container {
   width: 377px;
   height: 147px;
-  margin-top: -50px;
+  margin-top: -80px;
   background: linear-gradient(180deg, #3e3d45 0%, #252425 100%);
   border: 1px solid #3e3d45;
-
+margin-left: auto;
+margin-right: auto;
   display: flex;
   flex-direction: column;
   align-items: center;

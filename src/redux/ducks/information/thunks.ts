@@ -16,17 +16,26 @@ export const getInfoList = createAsyncThunk(
   }
 );
 
-export const deleteKeys = createAsyncThunk(
-  "/klyucheviki/delete",
-  async (keyId: number) => {
-    console.log("klyucheviki", keyId);
+// export const updateInfo = createAsyncThunk(
+//   "/proposal/update",
+//   async (item: { id: number; status: string }) => {
+//     const { data }: AxiosResponse = await http.put("/proposal/update", item);
 
-    // const { data }: AxiosResponse = await http.delete(
-    //   "/klyucheviki/delete",
-    //   {id: keyId}
-    // );
+//     console.log("/proposal/update", data);
 
-    // console.log("klyucheviki", data);
+//     // return data;
+//   }
+// );
+
+export const deleteInfo = createAsyncThunk(
+  "/information/delete",
+  async (id: number) => {
+    const { data }: AxiosResponse = await http.delete("/information/delete", {
+      data: { id },
+    });
+
+    console.log("/information/delete", data);
+    console.log("/information/delete", id);
 
     // return data;
   }

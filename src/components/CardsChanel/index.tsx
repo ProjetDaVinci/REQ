@@ -44,12 +44,15 @@ const CardsKey = () => {
     dispatch(thunks.information.getInfoList());
   }, []);
 
-  console.log("cardServer", cardServer);
-
   return (
     <>
       {cardServer?.map((item, key) => (
-        <CardChanel id={item.truba_id} desctext={item.text} key={key} />
+        <CardChanel
+          id={item.id}
+          idTrub={item.truba_id}
+          desctext={item.text}
+          key={key}
+        />
       ))}
     </>
   );

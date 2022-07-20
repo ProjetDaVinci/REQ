@@ -55,7 +55,7 @@ const MyCard: FC<ICard> = ({ date, name, desctext, subs, photo, id }) => {
 
   const onDelete = (id: number) => {
     dispatch(thunks.telegramAkk.deleteTelegram(id));
-    dispatch(actions.telegramAkk.deleteFilter({ id }));
+    dispatch(actions.telegramAkk.deleteTelegram(id));
   };
   return (
     <div className="col-xl-4 col-sm-6 mb-xl-5 mb-4">
@@ -87,9 +87,9 @@ const MyCard: FC<ICard> = ({ date, name, desctext, subs, photo, id }) => {
             <span className="text-body-card"> {desctext}</span>
           </div>
           <div className={styles.footer}>
-            <p className={styles.show_more_text} style={{ textAlign: "end" }}>
+            {/* <p className={styles.show_more_text} style={{ textAlign: "end" }}>
               Показать ещё
-            </p>
+            </p> */}
             <hr className="hr-card-dark" />
           </div>
         </div>

@@ -1,14 +1,17 @@
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import * as React from "react";
 import { FC, SVGProps, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_URL } from "../../constants";
 import { Close, Draw, Dump, Like, Notification } from "../../icons";
-import { selectors } from "../../redux/ducks";
+import { actions, selectors, thunks } from "../../redux/ducks";
+import { AppDispatch } from "../../redux/store";
 import styles from "./Card.module.css";
 
 interface ICard {
   id: number;
+  idTrub: number;
   desctext: string;
 }
 
@@ -45,12 +48,19 @@ interface ICard {
 </div>; */
 }
 
-const CardChanel: FC<ICard> = ({ id, desctext }) => {
+const CardChanel: FC<ICard> = ({ id, desctext, idTrub }) => {
+  const dispatch = useDispatch<AppDispatch>();
+
   const [numbersOfItems, setNumbers] = useState(80);
 
   const telegramCard = useSelector(selectors.telegramAkk.SelectTelegram);
 
-  const filtderTelegram = telegramCard.find((item) => item.id === id);
+  const filtderTelegram = telegramCard.find((item) => item.id === idTrub);
+
+  const onDump = () => {
+    dispatch(thunks.information.deleteInfo(id));
+    dispatch(actions.information.deleteInfo(id));
+  };
 
   return (
     <div className="col-xl-4 col-sm-6 mb-xl-5 mb-4">
@@ -68,7 +78,7 @@ const CardChanel: FC<ICard> = ({ id, desctext }) => {
             <p className="text-sm text-end mb-0 text-capitalize">
               <div className={styles.header_icon}>
                 <Draw />
-                <Dump />
+                <Dump onClick={onDump} />
               </div>
             </p>
             <div className="mt-m15 mh-16">
@@ -80,11 +90,30 @@ const CardChanel: FC<ICard> = ({ id, desctext }) => {
           </div>
         </div>
         <div className="card-body p-4 pt-3 pb-0">
-          <div className="text-body-card-wrapper">
-            <span className="text-body-card">
-              {desctext.slice(0, numbersOfItems)}
-            </span>
-          </div>
+          <AnimatePresence>
+            {numbersOfItems === 80 ? (
+              <motion.div
+                initial={{ height: "auto" }}
+                animate={{ height: 45 }}
+                exit={{ height: "auto", opacity: 1 }}
+                className="text-body-card-wrapper"
+              >
+                <span className="text-body-card">
+                  {desctext.slice(0, numbersOfItems)}
+                </span>
+              </motion.div>
+            ) : (
+              <motion.div
+                initial={{ height: 45 }}
+                animate={{ height: "auto" }}
+                exit={{ height: 45, opacity: 1 }}
+                transition={{ duration: 0.3 }}
+                className="text-body-card-wrapper"
+              >
+                <span className="text-body-card">{desctext}</span>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <div className={styles.footer}>
             {desctext.length > 80 ? (
