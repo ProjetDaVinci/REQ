@@ -6,7 +6,7 @@ export const getProposalList = createAsyncThunk(
   "/proposal/get-list",
   async () => {
     const { data }: AxiosResponse = await http.post("/proposal/get-list", {
-      limit: 20,
+      limit: 0,
       offset: 0,
     });
 

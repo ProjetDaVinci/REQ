@@ -404,3 +404,22 @@ span:active{color: red;
   font-size: 24px;
   transition: all 0.5s ease;
 }
+
+
+@media (max-width: 1199.98px) {
+  .g-sidenav-show.rtl .sidenav {
+    transform: translateX(17.125rem);
+  }
+
+  .g-sidenav-show:not(.rtl) .sidenav {
+    transform: translateX(-17.125rem);
+  }
+
+  .g-sidenav-show .sidenav.fixed-start+.main-content {
+    margin-left: 0 !important;
+  }
+
+  .g-sidenav-show.g-sidenav-pinned .sidenav {
+    transform: translateX(0);
+  }
+}

@@ -24160,6 +24160,43 @@ hr.horizontal.gray-light {
   }
 }
 
+@media (max-width: 1200px) {
+
+  .sidenav.fixed-start+.main-content {
+    margin-left: 4rem;
+  }
+
+  .sidenav.fixed-end+.main-content {
+    margin-right: 4rem;
+  }
+
+  .navbar-vertical.navbar-expand-xs {
+    max-width: 3.625rem !important;
+  }
+  .nav-link-text{
+    display: none;
+  }
+  .navbar-brand{
+    width: 30px;
+  }
+
+  .navbar-brand > svg{
+    width: 30px;
+  }
+
+  .sidenav .navbar-brand{
+    padding: 1.5rem 1rem !important;
+  }
+
+  .navbar-vertical .navbar-nav .nav-link{
+    justify-content: center;
+  }
+
+  .nav-link > .me-2{
+    margin-right: 0!important;
+  }
+}
+
 .sidenav .navbar-heading .docs-mini {
   padding-left: 3px;
 }
