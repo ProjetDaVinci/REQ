@@ -68,7 +68,9 @@ const Card: FC<ICard> = ({ date, status, desctext, id, idTrub }) => {
     // massTags.pop(inputTags);
     // massTags.push(inputTags);
     dispatch(actions.tagsCard.addTags({ id, name: inputTags }));
-    // setMass((prevState) => [...prevState, inputTags]);
+
+    // let zametki = selectTags?.join();
+    dispatch(thunks.tagsCard.updatesTagsProposal(id));
     setInputTags("");
     setChange(false);
     console.log("mass", mass);
@@ -76,6 +78,8 @@ const Card: FC<ICard> = ({ date, status, desctext, id, idTrub }) => {
 
   const deleteTags = (item: string) => {
     dispatch(actions.tagsCard.deleteTags({ id, name: item }));
+    dispatch(thunks.tagsCard.updatesTagsProposal(id));
+
     // const index: string[] = mass.filter((n) => n !== item);
     // setMass(index);
   };

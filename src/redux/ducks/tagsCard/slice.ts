@@ -1,6 +1,7 @@
 import { TagsItem } from "./types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { navigation } from "../../../constants";
+import { updatesTagsProposal } from "./thunks";
 
 const initialState: TagsItem[] = [
   { id: 12321321321321, mass: [] },
@@ -15,6 +16,7 @@ const tagsCard = createSlice({
         const itemfind = state.find((item) => item.id === payload.id);
         if (itemfind !== undefined) {
           itemfind.mass.push(payload.name);
+
           return state;
         } else if (itemfind === undefined) {
           const mass: string[] = [payload.name];
