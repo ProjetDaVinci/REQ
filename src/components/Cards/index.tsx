@@ -32,8 +32,10 @@ const Cards = () => {
   const cardServer = useSelector(selectors.proposal.SelectPoposal);
   const filter = useSelector(selectors.filterPages.SelectFilter);
 
-  let filtredItems = cardServer.filter(
-    (item) => item.status === (filter?.namePage ? filter.namePage : "Новая")
+  let filtredItems = cardServer?.filter(
+    (item) =>
+      item.status ===
+      (filter?.namePage !== undefined ? filter.namePage : "Новая")
   );
 
   useEffect(() => {

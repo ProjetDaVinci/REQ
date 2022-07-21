@@ -24,7 +24,7 @@ const Card: FC<ICard> = ({ date, status, desctext, id, idTrub }) => {
   const telegramCard = useSelector(selectors.telegramAkk.SelectTelegram);
   const filter = useSelector(selectors.filterPages.SelectFilter);
 
-  const filtderTelegram = telegramCard.find((item) => item.id === idTrub);
+  const filtderTelegram = telegramCard?.find((item) => item.id === idTrub);
 
   const dateLocal = new Date(date).toLocaleString();
 
