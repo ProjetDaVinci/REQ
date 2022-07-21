@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Board, Header } from "..";
 import { navigation } from "../../constants";
-import { actions, selectors } from "../../redux/ducks";
+import { actions, selectors, thunks } from "../../redux/ducks";
+import { AppDispatch } from "../../redux/store";
 import { data, dataTikets } from "./data";
 import styles from "./FilterSection.module.css";
 
 const FilterSection = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const filterGlobal = useSelector(selectors.filterPages.SelectFilter);
   const index = data.findIndex((value) => value === filterGlobal.namePage);
   const [categoryId, setCategoryid] = useState(index || 0);
@@ -20,6 +21,8 @@ const FilterSection = () => {
   const onClickCategory = (key: number, item: string) => {
     setCategoryid(key);
     dispatch(actions.filterPages.selectFilter(item));
+
+    dispatch(thunks.proposal.getProposalListCategory(item));
     // onAdd(item);
   };
 

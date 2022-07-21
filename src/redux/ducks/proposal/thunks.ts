@@ -1,16 +1,31 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { http } from "../../../services/http";
 import { AxiosResponse } from "axios";
+import { ProposalQuery } from "./types";
 
 export const getProposalList = createAsyncThunk(
   "/proposal/get-list",
-  async () => {
+  async (query: ProposalQuery) => {
     const { data }: AxiosResponse = await http.post("/proposal/get-list", {
-      limit: 0,
+      limit: query.limit,
       offset: 0,
+      query: [{ input: "status", value: query.status }],
+    });
+    console.log("/proposal/get-list", data);
+    return data;
+  }
+);
+
+export const getProposalListCategory = createAsyncThunk(
+  "/proposal/get-list-category",
+  async (status: string) => {
+    const { data }: AxiosResponse = await http.post("/proposal/get-list", {
+      limit: 30,
+      offset: 0,
+      query: [{ input: "status", value: status }],
     });
 
-    console.log("/proposal/get-list", data);
+    console.log("/proposal/get-list-category", data);
 
     return data;
   }

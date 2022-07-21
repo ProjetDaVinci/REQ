@@ -111,3 +111,36 @@ color: red;
   margin:0 11px;
 }
 
+.tags_buttons {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  overflow: hidden;
+  font-size: 14px;
+  background-color: #131A32;
+  border: 0px solid #fff;
+border-radius: 12px;
+padding: 2px 11px;
+color: #fff;
+transition: all 0.1s;
+
+}
+.tags_buttons:hover {
+  opacity: 0.7;
+}
+.tags_buttons:active {
+  background-color: #3550a8;
+
+}
+.tags_buttons > svg {
+transform: rotate(45deg);
+}
+
+.input_tags {
+  background-color: #131A32;
+  letter-spacing: none; 
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+
+  }

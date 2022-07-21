@@ -1,32 +1,9 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectors, thunks } from "../../redux/ducks";
 import { AppDispatch } from "../../redux/store";
 import MyCard from "../../UI/MyCard";
 
-const cardItem = [
-  {
-    date: "09.07.2022    13.40 мск",
-    name: "Вкусно и точка",
-    desctext:
-      "Вакансия, ищем, о нас, ищет специалиста,предлагаем на, для своих, компания",
-    subs: 6500,
-  },
-  {
-    date: "01.07.2022    17.40 мск",
-    name: "Green Forest ",
-    desctext:
-      "Вакансия, ищем, о нас, ищет специалиста,предлагаем на, для своих, компания",
-    subs: 7500,
-  },
-  {
-    date: "15.06.2022     08.25 мск",
-    name: "Golata ",
-    desctext:
-      "Вакансия, ищем, о нас, ищет специалиста,предлагаем на, для своих, компания",
-    subs: 2500,
-  },
-];
 const MyCardsChanel = () => {
   const dispatch = useDispatch<AppDispatch>();
 

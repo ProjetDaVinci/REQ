@@ -14,3 +14,4 @@ export type ProposalItem = {
 };
 
 export type ProposalRes = { count: number; data: ProposalItem[] };
+export type ProposalQuery = { limit: number; status: string };

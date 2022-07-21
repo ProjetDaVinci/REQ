@@ -55,7 +55,7 @@ const CardChanel: FC<ICard> = ({ id, desctext, idTrub }) => {
 
   const telegramCard = useSelector(selectors.telegramAkk.SelectTelegram);
 
-  const filtderTelegram = telegramCard.find((item) => item.id === idTrub);
+  const filtderTelegram = telegramCard?.find((item) => item.id === idTrub);
 
   const onDump = () => {
     dispatch(thunks.information.deleteInfo(id));

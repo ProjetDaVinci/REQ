@@ -6,45 +6,86 @@ import { AppDispatch } from "../../redux/store";
 import { Card } from "../../UI";
 import styles from "./Cards.module.css";
 
-const cardItem = [
-  {
-    date: "09.07.2022",
-    name: "Wezzy studio ",
-    desctext:
-      "ВСУ набирают в бригады заключенных из-за потерь заявило Минобороны России",
-  },
-  {
-    date: "09.07.2022",
-    name: "Wezzy studio ",
-    desctext:
-      "На железной дороге в Брянской области сработало взрывное устройство",
-  },
-  {
-    date: "09.07.2022",
-    name: "Wezzy studio ",
-    desctext:
-      "Силы ЛНР и России продвигаются в сторону Северска, Артемовска, Соледара",
-  },
-];
 const Cards = () => {
+  const [currentPage, setCurrentPage] = useState(30);
+  const [totalCount, setTotalCount] = useState(30);
+
+  const [fetching, setFetching] = useState(true);
   const dispatch = useDispatch<AppDispatch>();
 
   const cardServer = useSelector(selectors.proposal.SelectPoposal);
+  const countServer = useSelector(selectors.proposal.SelectCount);
+  console.log("countServer", countServer >= currentPage);
+
+  let boool = countServer >= currentPage;
+
   const filter = useSelector(selectors.filterPages.SelectFilter);
 
-  let filtredItems = cardServer?.filter(
-    (item) =>
-      item.status ===
-      (filter?.namePage !== undefined ? filter.namePage : "Новая")
-  );
+  // let filtredItems = cardServer?.filter(
+  //   (item) =>
+  //     item.status ===
+  //     (filter?.namePage !== undefined ? filter.namePage : "Новая")
+  // );
 
   useEffect(() => {
-    dispatch(thunks.proposal.getProposalList());
+    // if (filter.namePage !== "Новая") {
+    dispatch(
+      thunks.proposal.getProposalList({
+        limit: 30,
+        status: filter?.namePage !== undefined ? filter.namePage : "Новая",
+      })
+    );
+    setCurrentPage(30);
+    setTotalCount(countServer);
+    // }
+  }, [filter]);
+
+  useEffect(() => {
+    if (fetching) {
+      console.log("fetching");
+
+      // dispatch(thunks.proposal.getProposalList(currentPage));
+      dispatch(
+        thunks.proposal.getProposalList({
+          limit: currentPage,
+          status: filter?.namePage !== undefined ? filter.namePage : "Новая",
+        })
+      );
+      setCurrentPage((prevState) => prevState + 20);
+      setFetching(false);
+      setTotalCount(countServer);
+    }
+  }, [fetching]);
+
+  useEffect(() => {
+    setTotalCount(countServer);
+
+    document.addEventListener("scroll", scrollHandler);
+
+    return function () {
+      document.removeEventListener("scroll", scrollHandler);
+    };
   }, []);
 
+  const scrollHandler = (
+    e: React.KeyboardEvent<HTMLInputElement> & {
+      target: HTMLInputElement;
+    } & any
+  ) => {
+    if (
+      e.target.documentElement.scrollHeight -
+        (e.target.documentElement.scrollTop + window.innerHeight) <
+      100
+    ) {
+      setFetching(true);
+      console.log("scroll");
+    } else if (totalCount > currentPage === false) {
+      // console.log("ЩА КАК УЕБУ");
+    }
+  };
   return (
     <>
-      {filtredItems?.map((item, key) => (
+      {cardServer?.map((item, key) => (
         <Card
           idTrub={item.truba_id}
           id={item.id}

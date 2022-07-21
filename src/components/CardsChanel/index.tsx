@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectors, thunks } from "../../redux/ducks";
 import { TelegramAkkItem } from "../../redux/ducks/telegramAkk/types";
@@ -31,18 +31,49 @@ const cardItem = [
   },
 ];
 const CardsKey = () => {
+  const [currentPage, setCurrentPage] = useState(30);
+  const [fetching, setFetching] = useState(true);
   const dispatch = useDispatch<AppDispatch>();
 
   const cardServer = useSelector(selectors.information.SelectInfo);
 
-  let mass: any[] = [];
-
-  console.log("mass", mass);
-
   useEffect(() => {
     dispatch(thunks.telegramAkk.getListTelegram());
-    dispatch(thunks.information.getInfoList());
+    // dispatch(thunks.information.getInfoList());
   }, []);
+
+  useEffect(() => {
+    if (fetching) {
+      dispatch(thunks.information.getInfoList(currentPage));
+
+      console.log("fetching");
+      setCurrentPage((prevState) => prevState + 20);
+      setFetching(false);
+    }
+  }, [fetching]);
+
+  useEffect(() => {
+    document.addEventListener("scroll", scrollHandler);
+
+    return function () {
+      document.removeEventListener("scroll", scrollHandler);
+    };
+  }, []);
+
+  const scrollHandler = (
+    e: React.KeyboardEvent<HTMLInputElement> & {
+      target: HTMLInputElement;
+    } & any
+  ) => {
+    if (
+      e.target.documentElement.scrollHeight -
+        (e.target.documentElement.scrollTop + window.innerHeight) <
+      100
+    ) {
+      setFetching(true);
+      console.log("scroll");
+    }
+  };
 
   return (
     <>

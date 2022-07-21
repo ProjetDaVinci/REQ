@@ -4,9 +4,9 @@ import { AxiosResponse } from "axios";
 
 export const getInfoList = createAsyncThunk(
   "/information/get-list",
-  async () => {
+  async (limit: number) => {
     const { data }: AxiosResponse = await http.post("/information/get-list", {
-      limit: 20,
+      limit: limit,
       offset: 0,
     });
 

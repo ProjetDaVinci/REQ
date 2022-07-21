@@ -21,6 +21,8 @@ const Card: FC<ICard> = ({ date, status, desctext, id, idTrub }) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const [numbersOfItems, setNumbers] = useState(80);
+  const [onAdd, setAdd] = useState(false);
+  const [inputTags, setInputTags] = useState("");
   const telegramCard = useSelector(selectors.telegramAkk.SelectTelegram);
   const filter = useSelector(selectors.filterPages.SelectFilter);
 
@@ -51,16 +53,28 @@ const Card: FC<ICard> = ({ date, status, desctext, id, idTrub }) => {
     dispatch(thunks.proposal.deleteProposal(id));
     dispatch(actions.proposal.deleteProposal(id));
   };
+  let massTags: string[] = [];
+
+  const onAddTags = () => {
+    console.log("inputTags", inputTags);
+
+    massTags.push(inputTags);
+  };
+
+  console.log("massTags", massTags);
+
   return (
     <div className="col-xl-4 col-sm-6 mb-xl-5 mb-4">
       <div className="card bg-card">
         <div className="card-header bg-card p-3 pb-1">
           <div className="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-            <img
-              src={`https://app.teo-req.ru/${filtderTelegram?.photo}`}
-              style={{ width: 64, height: 64, borderRadius: 12 }}
-              alt=""
-            />
+            {filtderTelegram?.photo && (
+              <img
+                src={`https://app.teo-req.ru/${filtderTelegram?.photo}`}
+                style={{ width: 64, height: 64, borderRadius: 12 }}
+                alt=""
+              />
+            )}
           </div>
           <div className=" pt-1">
             <p className="text-sm text-end mb-0 text-capitalize">
@@ -72,14 +86,15 @@ const Card: FC<ICard> = ({ date, status, desctext, id, idTrub }) => {
             </p>
             <div className="mt-m15 mh-16">
               <p className="ml-75 mb-0 text-head-card ">
-                {filtderTelegram?.name}
+                {filtderTelegram?.name && filtderTelegram?.name.length > 35
+                  ? `${filtderTelegram?.name.slice(0, 35)}...`
+                  : filtderTelegram?.name}
               </p>
               <p className="ml-75 mb-0 text-head-card ">{dateLocal || null}</p>
             </div>
           </div>
         </div>
         <div className="card-body p-4 pt-3 pb-0">
-          <p className={styles.header_text}>{status} </p>
           <AnimatePresence>
             {numbersOfItems === 80 ? (
               <motion.div
@@ -130,7 +145,30 @@ const Card: FC<ICard> = ({ date, status, desctext, id, idTrub }) => {
           </div>
         </div>
 
-        <div className="card-footer p-4 pt-2 pb-2"></div>
+        <div className="card-footer p-4 pt-2 pb-2">
+          <button
+            className={styles.tags_buttons}
+            onClick={() => setAdd(!onAdd)}
+          >
+            <Close onClick={() => setAdd(!onAdd)} />
+          </button>
+          {onAdd ? (
+            <input
+              className={styles.input_tags}
+              type="text"
+              onChange={(event) => setInputTags(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  console.log("Enter");
+                  onAddTags();
+                }
+              }}
+            />
+          ) : null}
+          {massTags.map((item) => (
+            <div>{item}</div>
+          ))}
+        </div>
       </div>
     </div>
   );
