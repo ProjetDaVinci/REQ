@@ -7,6 +7,7 @@ import * as proposal from "./proposal";
 import * as information from "./information";
 import * as telegramAkk from "./telegramAkk";
 import * as filterPages from "./filterPages";
+import * as tagsCard from "./tagsCard";
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -17,6 +18,7 @@ export const rootReducer = combineReducers({
   information: information.reducer,
   telegramAkk: telegramAkk.reducer,
   filterPages: filterPages.reducer,
+  tagsCard: tagsCard.reducer,
 });
 
 export const actions = {
@@ -28,6 +30,7 @@ export const actions = {
   information: information.actions,
   telegramAkk: telegramAkk.actions,
   filterPages: filterPages.actions,
+  tagsCard: tagsCard.actions,
 };
 
 export const selectors = {
@@ -39,6 +42,7 @@ export const selectors = {
   information: information.selectors,
   telegramAkk: telegramAkk.selectors,
   filterPages: filterPages.selectors,
+  tagsCard: tagsCard.selectors,
 };
 
 export const thunks = {
@@ -48,4 +52,5 @@ export const thunks = {
   proposal: proposal.thunks,
   information: information.thunks,
   telegramAkk: telegramAkk.thunks,
+  tagsCard: tagsCard.thunks,
 };

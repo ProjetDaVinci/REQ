@@ -21,10 +21,18 @@ const Card: FC<ICard> = ({ date, status, desctext, id, idTrub }) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const [numbersOfItems, setNumbers] = useState(80);
-  const [onAdd, setAdd] = useState(false);
+  const [change, setChange] = useState(false);
   const [inputTags, setInputTags] = useState("");
+  const [mass, setMass] = useState<string[]>([]);
   const telegramCard = useSelector(selectors.telegramAkk.SelectTelegram);
   const filter = useSelector(selectors.filterPages.SelectFilter);
+
+  // const reduxTags = useSelector(selectors.tags.selectTagsMass(id));
+  const selectTags = useSelector(selectors.tagsCard.selectTagsMass(id));
+  console.log("====================================");
+  // console.log("reduxTags", reduxTags);
+  console.log("selectTags", selectTags);
+  console.log("====================================");
 
   const filtderTelegram = telegramCard?.find((item) => item.id === idTrub);
 
@@ -53,15 +61,25 @@ const Card: FC<ICard> = ({ date, status, desctext, id, idTrub }) => {
     dispatch(thunks.proposal.deleteProposal(id));
     dispatch(actions.proposal.deleteProposal(id));
   };
-  let massTags: string[] = [];
+  let massTags: any[] = [];
 
   const onAddTags = () => {
     console.log("inputTags", inputTags);
-
-    massTags.push(inputTags);
+    // massTags.pop(inputTags);
+    // massTags.push(inputTags);
+    dispatch(actions.tagsCard.addTags({ id, name: inputTags }));
+    // setMass((prevState) => [...prevState, inputTags]);
+    setInputTags("");
+    setChange(false);
+    console.log("mass", mass);
   };
 
-  console.log("massTags", massTags);
+  const deleteTags = (item: string) => {
+    dispatch(actions.tagsCard.deleteTags({ id, name: item }));
+    // const index: string[] = mass.filter((n) => n !== item);
+    // setMass(index);
+  };
+  console.log("mass2", mass);
 
   return (
     <div className="col-xl-4 col-sm-6 mb-xl-5 mb-4">
@@ -148,25 +166,38 @@ const Card: FC<ICard> = ({ date, status, desctext, id, idTrub }) => {
         <div className="card-footer p-4 pt-2 pb-2">
           <button
             className={styles.tags_buttons}
-            onClick={() => setAdd(!onAdd)}
+            onClick={() => setChange(!change)}
           >
-            <Close onClick={() => setAdd(!onAdd)} />
+            <Close onClick={() => setChange(!change)} />
           </button>
-          {onAdd ? (
-            <input
-              className={styles.input_tags}
-              type="text"
-              onChange={(event) => setInputTags(event.target.value)}
-              onKeyDown={(event) => {
-                if (event.key === "Enter") {
-                  console.log("Enter");
-                  onAddTags();
-                }
-              }}
-            />
+          {change ? (
+            <>
+              <input
+                className={styles.input_tags}
+                type="text"
+                value={inputTags}
+                placeholder="Новый тэг"
+                onChange={(event) => setInputTags(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    console.log("Enter");
+                    onAddTags();
+                  }
+                }}
+              />
+              <button
+                type="submit"
+                className={styles.tags_buttons}
+                onClick={onAddTags}
+              >
+                добавить
+              </button>
+            </>
           ) : null}
-          {massTags.map((item) => (
-            <div>{item}</div>
+          {selectTags?.map((item, key) => (
+            <div className={styles.tags_block} key={key}>
+              {item} <Close onClick={() => deleteTags(item)} />
+            </div>
           ))}
         </div>
       </div>
