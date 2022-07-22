@@ -23,7 +23,7 @@ const CreatableEditableSelect: React.FC<Props> = ({
   const [editingValue, setEditingValue] = useState<string>();
 
   const handleChange = useCallback(
-    (newValue: CreatableEditableSelectValue[]) => {
+    (newValue: CreatableEditableSelectValue[] & any) => {
       onChange(newValue);
     },
     [onChange]

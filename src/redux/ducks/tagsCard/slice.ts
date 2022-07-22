@@ -16,7 +16,6 @@ const tagsCard = createSlice({
         const itemfind = state.find((item) => item.id === payload.id);
         if (itemfind !== undefined) {
           itemfind.mass.push(payload.name);
-
           return state;
         } else if (itemfind === undefined) {
           const mass: string[] = [payload.name];
@@ -33,14 +32,11 @@ const tagsCard = createSlice({
     ) {
       if (payload) {
         const index = state.find((item) => item.id === payload.id);
-
         if (index !== undefined) {
           const deleted = index.mass.findIndex((n) => n === payload.name);
           index.mass.splice(deleted, 1);
-
           return state;
         }
-
         // return state;
       }
     },
@@ -79,6 +75,23 @@ const tagsCard = createSlice({
     builder.addCase(getListProposalTags.rejected, () => {
       return initialState;
     });
+    // builder.addCase(
+    //   updatesTagsProposal.fulfilled,
+    //   (state, { payload }: PayloadAction<ProposalRes>) => {
+    //     if (payload) {
+    //       const index = state.find((item) => item.id === payload.dataid);
+    //       if (index !== undefined) {
+    //         const deleted = index.mass.findIndex((n) => n === payload.name);
+    //         index.mass.splice(deleted, 1);
+    //         return state;
+    //       }
+    //       // return state;
+    //     }
+    //   }
+    // );
+    // builder.addCase(updatesTagsProposal.rejected, () => {
+    //   return initialState;
+    // });
   },
 });
 
