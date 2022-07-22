@@ -75,7 +75,7 @@ const Card: FC<ICard> = ({ date, status, desctext, id, idTrub }) => {
   };
 
   const deleteTags = (item: string) => {
-    dispatch(actions.tagsCard.deleteTags({ id, name: item }));
+    dispatch(actions.tagsCard.deleteTags({ id: id | 0, name: item || " " }));
     dispatch(thunks.tagsCard.updatesTagsProposal(id));
   };
 
