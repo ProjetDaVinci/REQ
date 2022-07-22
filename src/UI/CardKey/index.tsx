@@ -1,8 +1,9 @@
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import * as React from "react";
-import { FC, memo, SVGProps } from "react";
+import { FC, memo, SVGProps, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Close, Dump, Like, Notification } from "../../icons";
+import { Close, Draw, Dump, Like, Notification } from "../../icons";
 import { actions, thunks } from "../../redux/ducks";
 import { KlyuchevikiItem } from "../../redux/ducks/keys/types";
 import { AppDispatch } from "../../redux/store";
@@ -17,46 +18,17 @@ interface ICard {
   word: string;
   exclude: string;
   id: number;
-}
-
-{
-  /* <div className={styles.container}>
-      <div className={styles.header}>
-        <img
-          src="Weezy.png"
-          className={styles.image}
-          style={{ width: 68, height: 65, borderRadius: 12 }}
-        />
-        <div className={styles.header_content}>
-          <div style={{ marginTop: 5 }}>
-            <p className={styles.header_text}>{name} </p>
-            <p className={styles.header_text}>{date}</p>
-          </div>
-
-          <div className={styles.header_icon}>
-            <Dump />
-          </div>
-        </div>
-      </div>
-      <div className={styles.content}>
-        <span className={styles.span_border}>Стоп слова</span>
-
-        <p className={styles.desc_text}>{desctext}</p>
-      </div>
-      <div className={styles.footer}>
-        <p className={styles.show_more_text} style={{ textAlign: "end" }}>
-          Показать ещё
-        </p>
-      </div>
-    </div> */
+  onChangeKey: (id: number) => void;
 }
 
 const CardKey: FC<ICard> = memo(
-  ({ name, stopword, word, date, exclude, id }) => {
+  ({ name, stopword, word, date, exclude, id, onChangeKey }) => {
     const dispatch = useDispatch<AppDispatch>();
+    const [numbersOfItems, setNumbers] = useState(80);
 
     const onDelete = (id: number) => {
       dispatch(thunks.keys.deleteKeys(id));
+      dispatch(actions.keys.deleteKeys(id));
     };
     return (
       <div className="col-xl-4 col-sm-6 mb-xl-5 mb-4">
@@ -68,6 +40,7 @@ const CardKey: FC<ICard> = memo(
             <div className=" pt-1">
               <p className="text-sm text-end mb-0 text-capitalize">
                 <div className={styles.header_icon}>
+                  <Draw onClick={() => onChangeKey(id)} />
                   <Dump onClick={() => onDelete(id)} />
                 </div>
               </p>
@@ -85,12 +58,52 @@ const CardKey: FC<ICard> = memo(
           <div className="card-body p-4 pt-3 pb-0">
             <p className={styles.header_text}>{word} </p>
 
-            <span className="text-body-card"> {stopword}</span>
-
+            <AnimatePresence>
+              {numbersOfItems === 80 ? (
+                <motion.div
+                  initial={{ height: "auto" }}
+                  animate={{ height: 45 }}
+                  exit={{ height: "auto", opacity: 1 }}
+                  className="text-body-card-wrapper"
+                >
+                  <span className="text-body-card">
+                    {stopword.slice(0, numbersOfItems)}
+                  </span>
+                </motion.div>
+              ) : (
+                <motion.div
+                  initial={{ height: 45 }}
+                  animate={{ height: "auto" }}
+                  exit={{ height: 45, opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                  className="text-body-card-wrapper"
+                >
+                  <span className="text-body-card">{stopword}</span>
+                </motion.div>
+              )}
+            </AnimatePresence>
             <div className={styles.footer}>
-              <p className={styles.show_more_text} style={{ textAlign: "end" }}>
-                Показать ещё
-              </p>
+              {stopword.length > 80 ? (
+                numbersOfItems === 80 ? (
+                  <p
+                    className={styles.show_more_text}
+                    style={{ textAlign: "end" }}
+                    onClick={() => setNumbers(stopword.length)}
+                  >
+                    Показать ещё
+                  </p>
+                ) : (
+                  <p
+                    className={styles.show_more_text}
+                    style={{ textAlign: "end" }}
+                    onClick={() => setNumbers(80)}
+                  >
+                    Свернуть
+                  </p>
+                )
+              ) : (
+                <div className={styles.show_more_text_non} />
+              )}
               <hr className="hr-card-dark" />
             </div>
           </div>

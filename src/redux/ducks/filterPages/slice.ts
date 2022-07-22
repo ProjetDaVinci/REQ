@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { navigation } from "../../../constants";
 import _ from "lodash";
 
-const initialState: FilterSelect = { namePage: "Новая" };
+const initialState: FilterSelect = { namePage: "Новая", onAddKey: false };
 
 const filtersPage = createSlice({
   initialState,
@@ -14,6 +14,21 @@ const filtersPage = createSlice({
         state.namePage = payload;
         return state;
       }
+    },
+
+    onAddKey(state, { payload }: PayloadAction<boolean>) {
+      if (payload) {
+        state.onAddKey = payload;
+        return state;
+      }
+    },
+
+    onClose(state, { payload }: PayloadAction<boolean>) {
+      if (payload) {
+        state.onAddKey.valueOf() === payload;
+        return state;
+      }
+      return state;
     },
   },
 });

@@ -3,15 +3,15 @@ import { http } from "../../../services/http";
 import { AxiosResponse } from "axios";
 import { TagsItem } from "./types";
 
-export const getListTelegram = createAsyncThunk(
-  "/telegram/get-list",
+export const getListProposalTags = createAsyncThunk(
+  "/proposal/get-list-tagsCard",
   async () => {
-    const { data }: AxiosResponse = await http.post("/telegram/get-list", {
-      limit: 20,
+    const { data }: AxiosResponse = await http.post("/proposal/get-list", {
+      limit: 0,
       offset: 0,
     });
 
-    console.log("/telegram/get-list", data);
+    console.log("/proposal/get-list-tagsCard", data);
 
     return data;
   }

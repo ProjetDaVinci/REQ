@@ -16,3 +16,5 @@ export { default as Dump } from "./Dump";
 export { default as Close } from "./Close";
 export { default as Draw } from "./Draw";
 export { default as Menu } from "./Menu";
+export { default as Exit } from "./Exit";
+export { default as Plus } from "./Plus";

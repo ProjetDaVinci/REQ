@@ -21,12 +21,6 @@ const Cards = () => {
 
   const filter = useSelector(selectors.filterPages.SelectFilter);
 
-  // let filtredItems = cardServer?.filter(
-  //   (item) =>
-  //     item.status ===
-  //     (filter?.namePage !== undefined ? filter.namePage : "Новая")
-  // );
-
   useEffect(() => {
     // if (filter.namePage !== "Новая") {
     dispatch(
@@ -58,6 +52,9 @@ const Cards = () => {
   }, [fetching]);
 
   useEffect(() => {
+    dispatch(thunks.tagsCard.getListProposalTags());
+  }, []);
+  useEffect(() => {
     setTotalCount(countServer);
 
     document.addEventListener("scroll", scrollHandler);
@@ -80,7 +77,6 @@ const Cards = () => {
       setFetching(true);
       console.log("scroll");
     } else if (totalCount > currentPage === false) {
-      // console.log("ЩА КАК УЕБУ");
     }
   };
   return (

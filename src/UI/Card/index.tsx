@@ -2,7 +2,7 @@ import Image from "next/image";
 import * as React from "react";
 import { FC, SVGProps, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Close, Dump, Like, Notification } from "../../icons";
+import { Close, Dump, Like, Notification, Plus } from "../../icons";
 import { actions, selectors, thunks } from "../../redux/ducks";
 import { AppDispatch } from "../../redux/store";
 import styles from "./Card.module.css";
@@ -23,7 +23,6 @@ const Card: FC<ICard> = ({ date, status, desctext, id, idTrub }) => {
   const [numbersOfItems, setNumbers] = useState(80);
   const [change, setChange] = useState(false);
   const [inputTags, setInputTags] = useState("");
-  const [mass, setMass] = useState<string[]>([]);
   const telegramCard = useSelector(selectors.telegramAkk.SelectTelegram);
   const filter = useSelector(selectors.filterPages.SelectFilter);
 
@@ -73,17 +72,12 @@ const Card: FC<ICard> = ({ date, status, desctext, id, idTrub }) => {
     dispatch(thunks.tagsCard.updatesTagsProposal(id));
     setInputTags("");
     setChange(false);
-    console.log("mass", mass);
   };
 
   const deleteTags = (item: string) => {
     dispatch(actions.tagsCard.deleteTags({ id, name: item }));
     dispatch(thunks.tagsCard.updatesTagsProposal(id));
-
-    // const index: string[] = mass.filter((n) => n !== item);
-    // setMass(index);
   };
-  console.log("mass2", mass);
 
   return (
     <div className="col-xl-4 col-sm-6 mb-xl-5 mb-4">
@@ -172,7 +166,7 @@ const Card: FC<ICard> = ({ date, status, desctext, id, idTrub }) => {
             className={styles.tags_buttons}
             onClick={() => setChange(!change)}
           >
-            <Close onClick={() => setChange(!change)} />
+            <Plus onClick={() => setChange(!change)} />
           </button>
           {change ? (
             <>

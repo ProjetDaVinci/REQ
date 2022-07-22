@@ -15,39 +15,6 @@ interface ICard {
   desctext: string;
 }
 
-{
-  /* <div className={styles.container}>
-  <div className={styles.header}>
-    <img
-      src="Weezy.png"
-      className={styles.image}
-      style={{ width: 68, height: 65, borderRadius: 12 }}
-    />
-    <div className={styles.header_content}>
-      <div style={{ marginTop: 5 }}>
-        <p className={styles.header_text}>{name} </p>
-        <p className={styles.header_text}>{date}</p>
-      </div>
-
-      <div className={styles.header_icon}>
-        
-      </div>
-    </div>
-  </div>
-  <div className={styles.content}>
-    <span className={styles.span_border}>Описание</span>
-
-    <p className={styles.desc_text}>{desctext}</p>
-  </div>
-  <div className={styles.footer}>
-    <p className={styles.show_more_text} style={{ textAlign: "end" }}>
-      Показать ещё
-    </p>
-    <span className={styles.span_subs}>{subs} подписчиков</span>
-  </div>
-</div>; */
-}
-
 const CardChanel: FC<ICard> = ({ id, desctext, idTrub }) => {
   const dispatch = useDispatch<AppDispatch>();
 
@@ -77,7 +44,6 @@ const CardChanel: FC<ICard> = ({ id, desctext, idTrub }) => {
           <div className=" pt-1">
             <p className="text-sm text-end mb-0 text-capitalize">
               <div className={styles.header_icon}>
-                <Draw />
                 <Dump onClick={onDump} />
               </div>
             </p>

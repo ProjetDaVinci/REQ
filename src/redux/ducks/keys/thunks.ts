@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { http } from "../../../services/http";
 import { AxiosResponse } from "axios";
+import { KlyuchevikiQue, KlyuchevikiUpd } from "./types";
 
 export const getListKeys = createAsyncThunk(
   "/klyucheviki/get-list",
@@ -10,8 +11,6 @@ export const getListKeys = createAsyncThunk(
       offset: 0,
     });
 
-    console.log("klyucheviki", data);
-
     return data;
   }
 );
@@ -19,16 +18,33 @@ export const getListKeys = createAsyncThunk(
 export const deleteKeys = createAsyncThunk(
   "/klyucheviki/delete",
   async (keyId: number) => {
-    console.log("klyucheviki", keyId);
+    const { data }: AxiosResponse = await http.delete("/klyucheviki/delete", {
+      data: { id: keyId },
+    });
 
-    // const { data }: AxiosResponse = await http.delete(
-    //   "/klyucheviki/delete",
-    //   {id: keyId}
-    // );
+    return data;
+  }
+);
 
-    // console.log("klyucheviki", data);
+export const addKeys = createAsyncThunk(
+  "/klyucheviki/create",
+  async (item: KlyuchevikiQue) => {
+    const { data }: AxiosResponse = await http.post(
+      "/klyucheviki/create",
+      item
+    );
 
-    // return data;
+    return data;
+  }
+);
+
+export const updateKeys = createAsyncThunk(
+  "/klyucheviki/update",
+  async (item: KlyuchevikiUpd) => {
+    const { data }: AxiosResponse = await http.put("/klyucheviki/update", item);
+    console.log("/klyucheviki/update", data);
+
+    return data;
   }
 );
 

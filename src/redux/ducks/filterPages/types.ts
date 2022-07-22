@@ -5,4 +5,4 @@ export type FilterItem = {
 
 // export type Filter = { namePage: string; mass: FilterItem[] };
 
-export type FilterSelect = { namePage: string };
+export type FilterSelect = { namePage: string; onAddKey: boolean };

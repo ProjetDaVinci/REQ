@@ -1,11 +1,11 @@
 import { TagsItem } from "./types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { navigation } from "../../../constants";
-import { updatesTagsProposal } from "./thunks";
+import { getListProposalTags, updatesTagsProposal } from "./thunks";
+import { getProposalList } from "../proposal/thunks";
+import { ProposalRes } from "../proposal/types";
 
-const initialState: TagsItem[] = [
-  { id: 12321321321321, mass: [] },
-] as TagsItem[];
+const initialState: TagsItem[] = [] as TagsItem[];
 
 const tagsCard = createSlice({
   initialState,
@@ -40,9 +40,45 @@ const tagsCard = createSlice({
 
           return state;
         }
+
         // return state;
       }
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(
+      getListProposalTags.fulfilled,
+      (state, { payload }: PayloadAction<ProposalRes>) => {
+        for (let i = 0; i < payload.data.length - 1; i++) {
+          const index = state?.find((item) => item.id === payload.data[i].id);
+          if (index !== undefined) {
+            console.log(
+              ' payload.data[i].zametki.split(",")',
+              payload.data[i].zametki.split(",")
+            );
+            index.mass === payload.data[i].zametki.split(",");
+
+            return state;
+          }
+          if (index === undefined) {
+            const newObj = {
+              id: payload.data[i].id,
+              mass: payload.data[i].zametki.split(","),
+            };
+            console.log(
+              ' payload.data[i].zametki.split(",")',
+              payload.data[i].zametki.split(",")
+            );
+            state?.push(newObj);
+
+            return state;
+          }
+        }
+      }
+    );
+    builder.addCase(getListProposalTags.rejected, () => {
+      return initialState;
+    });
   },
 });
 

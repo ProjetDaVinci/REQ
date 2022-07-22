@@ -132,7 +132,7 @@ transition: all 0.1s;
 
 }
 .tags_buttons > svg {
-transform: rotate(45deg);
+/* transform: rotate(45deg); */
 }
 
 .input_tags {
@@ -141,7 +141,7 @@ transform: rotate(45deg);
   border: none;
   color: #fff;
   border-radius: 8px;
-  margin: 3px 7px;
+  margin: 0px 7px;
   /* margin-bottom: 5px; */
   }
 

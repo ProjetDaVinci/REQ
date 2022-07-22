@@ -5,3 +5,4 @@ export { default as Board } from "./Board";
 export { default as FilterSection } from "./FilterSection";
 export { default as Cards } from "./Cards";
 export { default as MyCardsChanel } from "./MyCardsChanel";
+export { default as ModalCard } from "./ModalCard";
