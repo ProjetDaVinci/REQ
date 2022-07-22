@@ -88,6 +88,7 @@ const Cards = () => {
           date={item.create_at}
           status={item.status}
           desctext={item.text}
+          zametki={item.zametki}
           key={key}
         />
       ))}

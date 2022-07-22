@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { navigation } from "../../../constants";
 import { getListProposalTags, updatesTagsProposal } from "./thunks";
 import { getProposalList } from "../proposal/thunks";
-import { ProposalRes } from "../proposal/types";
+import { ProposalREQ, ProposalRes } from "../proposal/types";
 
 const initialState: TagsItem[] = [] as TagsItem[];
 
@@ -52,14 +52,14 @@ const tagsCard = createSlice({
               ' payload.data[i].zametki.split(",")',
               payload.data[i].zametki.split(",")
             );
-            index.mass === payload.data[i].zametki.split(",");
+            index.mass === payload.data[i].zametki;
 
             return state;
           }
           if (index === undefined) {
             const newObj = {
               id: payload.data[i].id,
-              mass: payload.data[i].zametki.split(","),
+              mass: payload.data[i].zametki,
             };
             console.log(
               ' payload.data[i].zametki.split(",")',
@@ -75,23 +75,26 @@ const tagsCard = createSlice({
     builder.addCase(getListProposalTags.rejected, () => {
       return initialState;
     });
-    // builder.addCase(
-    //   updatesTagsProposal.fulfilled,
-    //   (state, { payload }: PayloadAction<ProposalRes>) => {
-    //     if (payload) {
-    //       const index = state.find((item) => item.id === payload.dataid);
-    //       if (index !== undefined) {
-    //         const deleted = index.mass.findIndex((n) => n === payload.name);
-    //         index.mass.splice(deleted, 1);
-    //         return state;
-    //       }
-    //       // return state;
-    //     }
-    //   }
-    // );
-    // builder.addCase(updatesTagsProposal.rejected, () => {
-    //   return initialState;
-    // });
+    builder.addCase(
+      updatesTagsProposal.fulfilled,
+      (state, { payload }: PayloadAction<ProposalREQ>) => {
+        if (payload) {
+          const index = state.find((item) => item.id === payload.proposal.id);
+          const index2 = state.findIndex((n) => n.id === payload.proposal.id);
+
+          if (index !== undefined) {
+            index.mass = payload.proposal.zametki;
+            // const deleted = index.mass.findIndex((n) => n === payload.name);
+            // index.mass.splice(deleted, 1);
+            return state;
+          }
+          return state;
+        }
+      }
+    );
+    builder.addCase(updatesTagsProposal.rejected, () => {
+      return initialState;
+    });
   },
 });
 

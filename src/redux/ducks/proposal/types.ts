@@ -14,4 +14,11 @@ export type ProposalItem = {
 };
 
 export type ProposalRes = { count: number; data: ProposalItem[] };
+
+export type ProposalREQ = {
+  message: string;
+  proposal: ProposalItem;
+  status: true;
+};
+
 export type ProposalQuery = { limit: number; status: string };

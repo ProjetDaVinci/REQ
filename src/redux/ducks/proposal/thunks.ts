@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { http } from "../../../services/http";
 import { AxiosResponse } from "axios";
 import { ProposalQuery } from "./types";
+import { TagsItemRes } from "../tagsCard/types";
 
 export const getProposalList = createAsyncThunk(
   "/proposal/get-list",
@@ -51,5 +52,22 @@ export const deleteProposal = createAsyncThunk(
     console.log("/proposal/delete", id);
 
     // return data;
+  }
+);
+
+export const updatesTagsProposal = createAsyncThunk(
+  "/proposal/update-tags-2",
+  async (item: TagsItemRes) => {
+    console.log("/proposal/update-tags_________________", item);
+
+    const { data }: AxiosResponse = await http.put("/proposal/update", {
+      id: item.id,
+      zametki: item.zametki,
+    });
+    console.log("/proposal/update-tags", data);
+
+    // console.log("/proposal/delete", id);
+
+    return data;
   }
 );

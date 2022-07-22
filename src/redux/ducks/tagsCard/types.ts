@@ -1,6 +1,11 @@
 export type TagsItem = {
   id: number;
-  mass: string[];
+  mass: string;
 };
 
 // export type Filter = { namePage: string; mass: FilterItem[] };
+
+export type TagsItemRes = {
+  id: number;
+  zametki: string;
+};

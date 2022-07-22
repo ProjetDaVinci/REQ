@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 
 import CreatableSelect from "react-select/creatable";
+import { colourStyles } from "./types";
 
 export interface CreatableEditableSelectOption {
   label: string;
@@ -13,12 +14,14 @@ interface Props {
   options: CreatableEditableSelectOption[];
   value: CreatableEditableSelectValue[];
   onChange: (value: CreatableEditableSelectValue[]) => void;
+  stylesCard?: boolean;
 }
 
 const CreatableEditableSelect: React.FC<Props> = ({
   options,
   value: propValue,
   onChange,
+  stylesCard,
 }) => {
   const [editingValue, setEditingValue] = useState<string>();
 
@@ -56,6 +59,7 @@ const CreatableEditableSelect: React.FC<Props> = ({
         return (
           <input
             type="text"
+            style={{ color: "#fff" }}
             defaultValue={data.value}
             onKeyDown={(ev) => {
               ev.stopPropagation();
@@ -72,6 +76,12 @@ const CreatableEditableSelect: React.FC<Props> = ({
       }
       return (
         <button
+          style={{
+            borderRadius: 15,
+            color: "#fff",
+            backgroundColor: "transparent",
+            borderColor: "transparent",
+          }}
           onClick={() => {
             setEditingValue(data.value);
           }}
@@ -88,7 +98,8 @@ const CreatableEditableSelect: React.FC<Props> = ({
       isMulti
       value={propValue}
       onChange={handleChange}
-      placeholder={"Введите своё или сделайте выбор"}
+      placeholder={"Введите текст"}
+      styles={stylesCard ? colourStyles : undefined}
       options={options}
       components={{
         MultiValueLabel,

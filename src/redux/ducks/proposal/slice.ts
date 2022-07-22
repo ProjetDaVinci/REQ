@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { navigation } from "../../../constants";
 import _ from "lodash";
-import { getProposalList } from "./thunks";
-import { ProposalRes } from "./types";
+import { getProposalList, updatesTagsProposal } from "./thunks";
+import { ProposalREQ, ProposalRes } from "./types";
 
 const initialState: ProposalRes = {} as ProposalRes;
 
@@ -48,6 +48,33 @@ const proposal = createSlice({
       }
     );
     builder.addCase(getProposalList.rejected, () => {
+      return initialState;
+    });
+    builder.addCase(
+      updatesTagsProposal.fulfilled,
+      (state, { payload }: PayloadAction<ProposalREQ>) => {
+        if (payload) {
+          const index2 = state.data.findIndex(
+            (n) => n.id === payload.proposal.id
+          );
+          if (index2 == -1) {
+            state.data.splice(index2, 1);
+            state.data.push(payload.proposal);
+            return state;
+          }
+        }
+        //   const index = state.data.find(
+        //     (item) => item.id === payload.proposal.id
+        //   );
+        //   if (index !== undefined) {
+        //     index.zametki === payload.proposal.zametki;
+        //     return state;
+        //   }
+
+        //   return state;
+      }
+    );
+    builder.addCase(updatesTagsProposal.rejected, () => {
       return initialState;
     });
   },

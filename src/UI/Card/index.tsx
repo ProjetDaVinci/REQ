@@ -1,6 +1,6 @@
 import Image from "next/image";
 import * as React from "react";
-import { FC, SVGProps, useState } from "react";
+import { FC, SVGProps, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Close, Dump, Like, Notification, Plus } from "../../icons";
 import { actions, selectors, thunks } from "../../redux/ducks";
@@ -8,6 +8,10 @@ import { AppDispatch } from "../../redux/store";
 import styles from "./Card.module.css";
 import img from "./Weezy.png";
 import { motion, AnimatePresence } from "framer-motion";
+import CreatableEditableSelect, {
+  CreatableEditableSelectOption,
+  CreatableEditableSelectValue,
+} from "../../components/FormAdd/CreatableEditableSelect";
 
 interface ICard {
   idTrub: number;
@@ -15,23 +19,44 @@ interface ICard {
   date: string;
   status: string;
   desctext: string;
+  zametki: string;
 }
+const options: CreatableEditableSelectOption[] = [];
 
-const Card: FC<ICard> = ({ date, status, desctext, id, idTrub }) => {
+const Card: FC<ICard> = ({ date, status, desctext, id, idTrub, zametki }) => {
   const dispatch = useDispatch<AppDispatch>();
+  const telegramCard = useSelector(selectors.telegramAkk.SelectTelegram);
+
+  console.log("zametki", zametki);
+  useEffect(() => {
+    if (zametki !== "") {
+      let find = zametki.split(",");
+      let mass: CreatableEditableSelectValue[] = [];
+
+      for (let i = 0; i < find.length; i++) {
+        let newObjFind = {
+          value: find[i],
+          label: find[i],
+        };
+        mass.push(newObjFind);
+      }
+      console.log("mass", mass);
+
+      setValueStop(mass);
+    }
+  }, [telegramCard]);
+
+  const [valueStop, setValueStop] = useState<CreatableEditableSelectValue[]>(
+    []
+  );
+  const [massRes, setMassRes] = useState<CreatableEditableSelectValue[]>([]);
 
   const [numbersOfItems, setNumbers] = useState(80);
-  const [change, setChange] = useState(false);
   const [inputTags, setInputTags] = useState("");
-  const telegramCard = useSelector(selectors.telegramAkk.SelectTelegram);
   const filter = useSelector(selectors.filterPages.SelectFilter);
 
   // const reduxTags = useSelector(selectors.tags.selectTagsMass(id));
   const selectTags = useSelector(selectors.tagsCard.selectTagsMass(id));
-  console.log("====================================");
-  // console.log("reduxTags", reduxTags);
-  console.log("selectTags", selectTags);
-  console.log("====================================");
 
   const filtderTelegram = telegramCard?.find((item) => item.id === idTrub);
 
@@ -60,7 +85,23 @@ const Card: FC<ICard> = ({ date, status, desctext, id, idTrub }) => {
     dispatch(thunks.proposal.deleteProposal(id));
     dispatch(actions.proposal.deleteProposal(id));
   };
-  let massTags: any[] = [];
+
+  const handleChange = (options: CreatableEditableSelectValue[]) => {
+    setValueStop(options);
+    let zametkiMass: string[] = [];
+
+    options.map((item) => zametkiMass.push(item.value));
+    // setMassRes(zametki);
+
+    console.log("zametki", zametkiMass);
+
+    dispatch(
+      thunks.proposal.updatesTagsProposal({
+        id,
+        zametki: zametkiMass !== [] ? zametkiMass.join() : " ",
+      })
+    );
+  };
 
   const onAddTags = () => {
     console.log("inputTags", inputTags);
@@ -69,14 +110,14 @@ const Card: FC<ICard> = ({ date, status, desctext, id, idTrub }) => {
     // dispatch(actions.tagsCard.addTags({ id, name: inputTags }));
 
     // let zametki = selectTags?.join();
-    dispatch(thunks.tagsCard.updatesTagsProposal(id));
+    // dispatch(thunks.tagsCard.updatesTagsProposal(id));
     setInputTags("");
-    setChange(false);
+    // setChange(false);
   };
 
   const deleteTags = (item: string) => {
     // dispatch(actions.tagsCard.deleteTags({ id: id | 0, name: item || " " }));
-    dispatch(thunks.tagsCard.updatesTagsProposal(id));
+    // dispatch(thunks.tagsCard.updatesTagsProposal(id));
   };
 
   return (
@@ -162,13 +203,13 @@ const Card: FC<ICard> = ({ date, status, desctext, id, idTrub }) => {
         </div>
 
         <div className="card-footer p-4 pt-2 pb-2">
-          <button
+          {/* <button
             className={styles.tags_buttons}
             onClick={() => setChange(!change)}
           >
             <Plus onClick={() => setChange(!change)} />
-          </button>
-          {change ? (
+          </button> */}
+          {/* {change ? (
             <>
               <input
                 className={styles.input_tags}
@@ -191,12 +232,18 @@ const Card: FC<ICard> = ({ date, status, desctext, id, idTrub }) => {
                 добавить
               </button>
             </>
-          ) : null}
-          {selectTags?.map((item, key) => (
+          ) : null} */}
+          <CreatableEditableSelect
+            stylesCard={true}
+            options={options}
+            value={valueStop}
+            onChange={handleChange}
+          />
+          {/* {selectTags?.map((item, key) => (
             <div className={styles.tags_block} key={key}>
               {item} <Close onClick={() => deleteTags(item)} />
             </div>
-          ))}
+          ))} */}
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { http } from "../../../services/http";
 import { AxiosResponse } from "axios";
-import { TagsItem } from "./types";
+import { TagsItem, TagsItemRes } from "./types";
 
 export const getListProposalTags = createAsyncThunk(
   "/proposal/get-list-tagsCard",
@@ -32,20 +32,18 @@ export const deleteTags = createAsyncThunk(
 
 export const updatesTagsProposal = createAsyncThunk(
   "/proposal/update-tags",
-  async (id: number, { getState }) => {
-    const { tagsCard } = getState() as { tagsCard: TagsItem[] };
-
-    const zametki = tagsCard.find((zam) => zam.id === id);
+  async (item: TagsItemRes) => {
+    console.log("/proposal/update-tags_________________", item);
 
     const { data }: AxiosResponse = await http.put("/proposal/update", {
-      id: id,
-      zametki: zametki?.mass.join(),
+      id: item.id,
+      zametki: item.zametki !== "" ? item.zametki : "пустой",
     });
     console.log("/proposal/update-tags", data);
 
     // console.log("/proposal/delete", id);
 
-    // return data;
+    return data;
   }
 );
 
