@@ -12,9 +12,6 @@ const Home: NextPage = () => {
   // const { data: session, status } = useSession();
 
   const token = useSelector(selectors.auth.SelectToken);
-  console.log("====================================");
-  console.log(token);
-  console.log("====================================");
 
   return token ? (
     <Layout>

@@ -1,7 +1,7 @@
 export const colourStyles = {
   container: (styles: any) => ({
     ...styles,
-
+    fontSize: 12,
     width: "100%",
   }),
   control: (styles: any) => ({
@@ -53,5 +53,9 @@ export const colourStyles = {
     backgroundColor: "#131A32",
     borderColor: "",
     borderRadius: 15,
+  }),
+  indicatorContainer: (styles: any) => ({
+    ...styles,
+    padding: 4,
   }),
 };

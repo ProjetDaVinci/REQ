@@ -27,6 +27,8 @@ const ModalCard = ({
           maxWidth: 500,
           margin: "0 auto",
           padding: 20,
+          // minHeight: "55%",
+          // height: "fit-content",
         },
       }}
       ariaHideApp={false}

@@ -27,7 +27,7 @@
 }
 
 .head_container {
-  width: 377px;
+  width: 90%;
   height: 147px;
   margin-top: -80px;
   background: linear-gradient(180deg, #3e3d45 0%, #252425 100%);
@@ -64,7 +64,7 @@ margin-right: auto;
 }
 
 .form_container {
-  padding: 10px;
+  padding: 20px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -75,12 +75,12 @@ margin-right: auto;
   width: 100%;
   padding: 0 16px;
   margin: 7px 0;
-  background-color: #1f2029;
+  background-color: #fff;
   /* Linear/Dark Snow */
   height: 48px;
   border: 1px solid #c7ccd0;
-  color: #fff;
-  border-radius: 4px;
+  color: #000;
+  border-radius: 8px;
   box-shadow: 0 4px 8px 0 rgb(21 21 21 / 20%);
   border: none;
   outline: none;

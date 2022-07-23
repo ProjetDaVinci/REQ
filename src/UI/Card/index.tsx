@@ -27,25 +27,6 @@ const Card: FC<ICard> = ({ date, status, desctext, id, idTrub, zametki }) => {
   const dispatch = useDispatch<AppDispatch>();
   const telegramCard = useSelector(selectors.telegramAkk.SelectTelegram);
 
-  console.log("zametki", zametki);
-  useEffect(() => {
-    if (zametki !== "") {
-      let find = zametki.split(",");
-      let mass: CreatableEditableSelectValue[] = [];
-
-      for (let i = 0; i < find.length; i++) {
-        let newObjFind = {
-          value: find[i],
-          label: find[i],
-        };
-        mass.push(newObjFind);
-      }
-      console.log("mass", mass);
-
-      setValueStop(mass);
-    }
-  }, [telegramCard]);
-
   const [valueStop, setValueStop] = useState<CreatableEditableSelectValue[]>(
     []
   );
@@ -70,15 +51,34 @@ const Card: FC<ICard> = ({ date, status, desctext, id, idTrub, zametki }) => {
         status: "Не одоренные заявки",
       })
     );
-    dispatch(actions.proposal.changeProposal({ id, status: filter.namePage }));
+    // dispatch(actions.proposal.changeProposal({ id, status: filter.namePage }));
   };
+  useEffect(() => {
+    if (zametki !== "") {
+      let find = zametki.split(",");
+      let mass: CreatableEditableSelectValue[] = [];
 
+      for (let i = 0; i < find.length; i++) {
+        let newObjFind = {
+          value: find[i],
+          label: find[i],
+        };
+        mass.push(newObjFind);
+      }
+      console.log("mass", mass);
+
+      setValueStop(mass);
+    }
+    if (zametki === "") {
+      setValueStop([]);
+    }
+  }, [filter, zametki]);
   const onLikesClick = () => {
     // Одобренные
     dispatch(
       thunks.proposal.updateProposal({ id, status: "Одоренные заявки" })
     );
-    dispatch(actions.proposal.changeProposal({ id, status: filter.namePage }));
+    // dispatch(actions.proposal.changeProposal({ id, status: filter.namePage }));
   };
 
   const onDump = () => {

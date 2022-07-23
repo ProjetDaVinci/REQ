@@ -32,7 +32,7 @@ const Cards = () => {
     setCurrentPage(30);
     setTotalCount(countServer);
     // }
-  }, [filter]);
+  }, [filter, countServer]);
 
   useEffect(() => {
     if (fetching) {

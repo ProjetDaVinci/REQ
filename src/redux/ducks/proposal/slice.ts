@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { navigation } from "../../../constants";
 import _ from "lodash";
-import { getProposalList, updatesTagsProposal } from "./thunks";
+import { getProposalList, updateProposal, updatesTagsProposal } from "./thunks";
 import { ProposalREQ, ProposalRes } from "./types";
 
 const initialState: ProposalRes = {} as ProposalRes;
@@ -20,25 +20,6 @@ const proposal = createSlice({
       }
       return state;
     },
-    changeProposal(
-      state,
-      { payload }: PayloadAction<{ id: number; status: string }>
-    ) {
-      // const index = state.data.find((item) => item.id === payload.id);
-
-      const index = state.data.findIndex((n) => n.id === payload.id);
-      console.log("index", index);
-
-      if (payload) {
-        if (index !== -1) {
-          console.log("index", state.data[index].text);
-
-          state.data[index].status = payload.status;
-          return state;
-        }
-      }
-      return state;
-    },
   },
   extraReducers: (builder) => {
     builder.addCase(
@@ -48,6 +29,27 @@ const proposal = createSlice({
       }
     );
     builder.addCase(getProposalList.rejected, () => {
+      return initialState;
+    });
+
+    builder.addCase(
+      updateProposal.fulfilled,
+      (state, { payload }: PayloadAction<ProposalREQ>) => {
+        if (payload) {
+          const index = state.data.findIndex(
+            (n) => n.id === payload.proposal.id
+          );
+          if (index !== -1) {
+            state.data.splice(index, 1);
+            state.data.push(payload.proposal);
+
+            return state;
+          }
+        }
+        // return payload;
+      }
+    );
+    builder.addCase(updateProposal.rejected, () => {
       return initialState;
     });
     builder.addCase(

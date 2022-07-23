@@ -182,6 +182,10 @@ span:active{color: red;
   transform: translateX(44px) rotate(-270deg);
 }
 
+.bg-button{
+  background: linear-gradient(180deg, #3e3d45 0%, #252425 100%);
+}
+
 
 .card-3d-wrap {
   position: relative;
@@ -206,7 +210,7 @@ span:active{color: red;
 .card-front, .card-back {
   width: 100%;
   height: 100%;
-  background-color: #2a2b38;
+  background-color: #fff;
   background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
   background-position: bottom center;
   background-repeat: no-repeat;

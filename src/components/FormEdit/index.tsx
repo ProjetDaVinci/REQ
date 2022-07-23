@@ -14,7 +14,7 @@ import CreatableEditableSelect, {
   CreatableEditableSelectOption,
   CreatableEditableSelectValue,
 } from "../FormAdd/CreatableEditableSelect";
-import { Exit } from "../../icons";
+import { Close, Exit } from "../../icons";
 
 const options: CreatableEditableSelectOption[] = [];
 type FormRes = {
@@ -69,7 +69,7 @@ const FormEdit: FC<FormModal> = ({ setIsVisible, idKeys }) => {
 
   useEffect(() => {
     dispatch(thunks.telegramAkk.getListTelegram());
-    for (let i = 0; i < telegramAkk.length - 1; i++) {
+    for (let i = 0; i < telegramAkk?.length - 1; i++) {
       const newObj = {
         value: telegramAkk[i].name,
         label: telegramAkk[i].name,
@@ -121,7 +121,7 @@ const FormEdit: FC<FormModal> = ({ setIsVisible, idKeys }) => {
     <div className="text-black">
       <div className={styles.modal_header}>
         <p className={styles.hedder_text}>Изменение ключевика</p>
-        <Exit onClick={() => setIsVisible(false)} fill="black" />
+        <Close onClick={() => setIsVisible(false)} fill="black" />
       </div>
       <div className={styles.modal_body}>
         <Form
@@ -193,7 +193,7 @@ const FormEdit: FC<FormModal> = ({ setIsVisible, idKeys }) => {
                 className="btn mt-4 bg-gradient-primary w-100"
                 onClick={handleSubmit}
               >
-                Добавить
+                Сохранить
               </button>
             </form>
           )}

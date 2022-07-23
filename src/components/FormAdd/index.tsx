@@ -14,7 +14,7 @@ import CreatableEditableSelect, {
   CreatableEditableSelectOption,
   CreatableEditableSelectValue,
 } from "./CreatableEditableSelect";
-import { Exit } from "../../icons";
+import { Close, Exit } from "../../icons";
 
 const options: CreatableEditableSelectOption[] = [];
 type FormRes = {
@@ -80,7 +80,7 @@ const FormAdd: FC<FormModal> = ({ setIsVisible }) => {
     <div className="text-black">
       <div className={styles.modal_header}>
         <p className={styles.hedder_text}>Добавление ключевика</p>
-        <Exit onClick={() => setIsVisible(false)} fill="black" />
+        <Close onClick={() => setIsVisible(false)} fill="black" />
       </div>
       <div className={styles.modal_body}>
         <Form
@@ -148,7 +148,7 @@ const FormAdd: FC<FormModal> = ({ setIsVisible }) => {
                 className="btn mt-4 bg-gradient-primary w-100"
                 onClick={handleSubmit}
               >
-                Добавить
+                Сохранить
               </button>
             </form>
           )}

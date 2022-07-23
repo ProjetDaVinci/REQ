@@ -78,7 +78,8 @@ const CreatableEditableSelect: React.FC<Props> = ({
         <button
           style={{
             borderRadius: 15,
-            color: "#fff",
+            fontSize: stylesCard ? 12 : undefined,
+            color: stylesCard ? "#fff" : "black",
             backgroundColor: "transparent",
             borderColor: "transparent",
           }}

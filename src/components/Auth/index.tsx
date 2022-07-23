@@ -45,7 +45,13 @@ const AuthComponent = () => {
     } else {
       console.log("infoReg", infoReg);
 
-      // dispatch(thunks.auth.registration(infoReg));
+      dispatch(
+        thunks.auth.registration({
+          name: name,
+          login: login,
+          password_hash: password_hash,
+        })
+      );
       console.log("resServer2", resServer);
     }
   };
@@ -93,81 +99,85 @@ const AuthComponent = () => {
                         <Google />
                       </div>
                     </div>
-                    <div className="center-wrap">
-                      <div className={`section text-center `}>
-                        <Form
-                          onSubmit={onSignin}
-                          render={({ handleSubmit, form }) => (
-                            <form onSubmit={handleSubmit}>
-                              <Field name="email">
-                                {({ input, meta }) => (
-                                  <div>
-                                    <input
-                                      {...input}
-                                      type="Email"
-                                      placeholder="Email"
-                                      className={`${styles.form_input} mt-2`}
-                                    />
-                                    {meta.error && meta.touched && (
-                                      <span>{meta.error}</span>
-                                    )}
-                                  </div>
-                                )}
-                              </Field>
-                              <Field name="password">
-                                {({ input, meta }) => (
-                                  <div>
-                                    <input
-                                      {...input}
-                                      type="password"
-                                      placeholder="Пароль"
-                                      className={`${styles.form_input} mt-2`}
-                                    />
-                                    {meta.error && meta.touched && (
-                                      <span>{meta.error}</span>
-                                    )}
-                                  </div>
-                                )}
-                              </Field>
-                              {!checked && (
-                                <div className={styles.row_container}>
-                                  <Switch
-                                    onChange={() => setCheckedBox(!checkedBox)}
-                                    checked={checkedBox}
-                                    uncheckedIcon={false}
-                                    checkedIcon={false}
-                                    activeBoxShadow="0 0 2px 3px #3bf"
-                                    handleDiameter={20}
-                                    height={15}
-                                    width={30}
-                                    boxShadow="0px 2px 6px rgba(0, 0, 0, 0.25)"
+                    <div className={styles.form_container}>
+                      <Form
+                        onSubmit={onSignin}
+                        render={({ handleSubmit, form }) => (
+                          <form onSubmit={handleSubmit}>
+                            <Field name="email">
+                              {({ input, meta }) => (
+                                <div>
+                                  <input
+                                    {...input}
+                                    type="Email"
+                                    placeholder="Email"
+                                    className={`${styles.form_input} mt-2`}
                                   />
-                                  <p className={styles.switch_text}>
-                                    Запомнить меня
-                                  </p>
+                                  {meta.error && meta.touched && (
+                                    <span>{meta.error}</span>
+                                  )}
                                 </div>
                               )}
+                            </Field>
+                            <Field name="password">
+                              {({ input, meta }) => (
+                                <div>
+                                  <input
+                                    {...input}
+                                    type="password"
+                                    placeholder="Пароль"
+                                    className={`${styles.form_input} mt-2`}
+                                  />
+                                  {meta.error && meta.touched && (
+                                    <span>{meta.error}</span>
+                                  )}
+                                </div>
+                              )}
+                            </Field>
+                            {!checked && (
+                              <div className={styles.row_container}>
+                                <Switch
+                                  onChange={() => setCheckedBox(!checkedBox)}
+                                  checked={checkedBox}
+                                  uncheckedIcon={false}
+                                  checkedIcon={false}
+                                  activeBoxShadow="0 0 2px 3px #3bf"
+                                  handleDiameter={20}
+                                  height={15}
+                                  width={30}
+                                  boxShadow="0px 2px 6px rgba(0, 0, 0, 0.25)"
+                                />
+                                <p className={styles.switch_text}>
+                                  Запомнить меня
+                                </p>
+                              </div>
+                            )}
 
-                              <button
-                                type="submit"
-                                // disabled={submitting}
-                                className="btn mt-4 bg-gradient-primary"
-                                onClick={handleSubmit}
-                              >
-                                Войти
-                              </button>
-                            </form>
-                          )}
-                        />
-                      </div>
+                            <button
+                              type="submit"
+                              // disabled={submitting}
+                              className="btn mt-4 text-white bg-card"
+                              onClick={handleSubmit}
+                            >
+                              Войти
+                            </button>
+                          </form>
+                        )}
+                      />
                     </div>
                   </div>
                   <div className="card-back">
                     <div className="center-wrap">
-                      <div className={`section text-center`}>
-                        <h4 className="mb-4 pb-3 text-white text">
-                          Зарегистрироваться
-                        </h4>
+                      <div className={styles.head_container}>
+                        <p className={styles.head_text}>Зарегистрироваться</p>
+                        <div className={styles.head_icons_container}>
+                          <Facebook />
+
+                          <GitHub />
+                          <Google />
+                        </div>
+                      </div>
+                      <div className={styles.form_container}>
                         <Form
                           onSubmit={onReg}
                           render={({ handleSubmit, form }) => (
@@ -187,7 +197,7 @@ const AuthComponent = () => {
                                   </div>
                                 )}
                               </Field>
-                              <Field name="email">
+                              <Field name="login">
                                 {({ input, meta }) => (
                                   <div>
                                     <input
@@ -202,7 +212,7 @@ const AuthComponent = () => {
                                   </div>
                                 )}
                               </Field>
-                              <Field name="password">
+                              <Field name="password_hash">
                                 {({ input, meta }) => (
                                   <div>
                                     <input
@@ -220,7 +230,7 @@ const AuthComponent = () => {
                               <button
                                 type="submit"
                                 // disabled={submitting}
-                                className="btn mt-4 bg-gradient-primary"
+                                className="btn mt-4 text-white bg-card"
                                 onClick={handleSubmit}
                               >
                                 Зарегистрироваться

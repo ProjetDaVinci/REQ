@@ -36,8 +36,9 @@ export const updateProposal = createAsyncThunk(
   "/proposal/update",
   async (item: { id: number; status: string }) => {
     const { data }: AxiosResponse = await http.put("/proposal/update", item);
+    console.log("/proposal/update", data);
 
-    // return data;
+    return data;
   }
 );
 
