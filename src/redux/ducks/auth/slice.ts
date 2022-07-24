@@ -11,6 +11,11 @@ const AuthSlice = createSlice({
     signOut(state) {
       if (state.token) {
         state.token = "";
+
+        state.user.isAuthorized = false;
+        state.user.password = "";
+        state.user.email = "";
+        state.user.id = "";
       }
       return state;
     },

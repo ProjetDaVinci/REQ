@@ -27,6 +27,9 @@ const AuthComponent = () => {
     if (login === "" && password_hash === "") {
       window.alert("Заполните необходимые поля");
     } else {
+      console.log("====================================");
+      console.log(user);
+      console.log("====================================");
       dispatch(
         thunks.auth.login({
           password_hash: password_hash,

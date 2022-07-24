@@ -7,10 +7,14 @@ import { AxiosResponse } from "axios";
 export const registration = createAsyncThunk(
   "/user/reg",
   async (authData: IAuthReg) => {
-    const { data }: AxiosResponse = await http.post("/user/reg", authData);
+    const { data }: AxiosResponse = await http.post("/user/reg", {
+      password_hash: authData.password_hash,
+      login: authData.login,
+      name: authData.name,
+    });
 
     console.log("registration", data);
-
+    console.log();
     return data;
   }
 );
@@ -29,7 +33,8 @@ export const login = createAsyncThunk(
   "/user/login",
   async (authData: IAuthData) => {
     const { data }: AxiosResponse = await http.post(`/user/login`, {
-      authData,
+      password_hash: authData.password_hash,
+      login: authData.login,
     });
     console.log("data", data);
 
