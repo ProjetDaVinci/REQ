@@ -27,7 +27,12 @@ const AuthComponent = () => {
     if (login === "" && password_hash === "") {
       window.alert("Заполните необходимые поля");
     } else {
-      dispatch(thunks.auth.login(user));
+      dispatch(
+        thunks.auth.login({
+          password_hash: password_hash,
+          login: login,
+        })
+      );
       router.push("/");
       if (resServer.status === false) {
         window.alert(resServer.message);
@@ -104,7 +109,7 @@ const AuthComponent = () => {
                         onSubmit={onSignin}
                         render={({ handleSubmit, form }) => (
                           <form onSubmit={handleSubmit}>
-                            <Field name="email">
+                            <Field name="login">
                               {({ input, meta }) => (
                                 <div>
                                   <input
@@ -119,7 +124,7 @@ const AuthComponent = () => {
                                 </div>
                               )}
                             </Field>
-                            <Field name="password">
+                            <Field name="password_hash">
                               {({ input, meta }) => (
                                 <div>
                                   <input
