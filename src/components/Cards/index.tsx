@@ -5,7 +5,7 @@ import { selectors, thunks } from "../../redux/ducks";
 import { AppDispatch } from "../../redux/store";
 import { Card } from "../../UI";
 import styles from "./Cards.module.css";
-
+import SkeletonComponent from "../../UI/SceletonComponets";
 const Cards = () => {
   const [currentPage, setCurrentPage] = useState(30);
   const [totalCount, setTotalCount] = useState(30);
@@ -15,6 +15,7 @@ const Cards = () => {
 
   const cardServer = useSelector(selectors.proposal.SelectPoposal);
   const countServer = useSelector(selectors.proposal.SelectCount);
+  const isLoading = useSelector(selectors.proposal.SelectPending);
   console.log("countServer", countServer >= currentPage);
 
   let boool = countServer >= currentPage;
@@ -81,17 +82,19 @@ const Cards = () => {
   };
   return (
     <>
-      {cardServer?.map((item, key) => (
-        <Card
-          idTrub={item.truba_id}
-          id={item.id}
-          date={item.create_at}
-          status={item.status}
-          desctext={item.text}
-          zametki={item.zametki}
-          key={key}
-        />
-      ))}
+      {isLoading
+        ? [...Array(30)].map((item, index) => <SkeletonComponent key={index} />)
+        : cardServer?.map((item, key) => (
+            <Card
+              idTrub={item.truba_id}
+              id={item.id}
+              date={item.create_at}
+              status={item.status}
+              desctext={item.text}
+              zametki={item.zametki}
+              key={key}
+            />
+          ))}
     </>
   );
 };

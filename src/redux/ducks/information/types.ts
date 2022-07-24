@@ -9,4 +9,8 @@ export type InformationItem = {
   truba_id: number;
 };
 
-export type InformationRes = { count: number; data: InformationItem[] };
+export type InformationRes = {
+  count: number;
+  data: InformationItem[];
+  isPending: boolean;
+};

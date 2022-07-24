@@ -5,6 +5,7 @@ import { TelegramAkkItem } from "../../redux/ducks/telegramAkk/types";
 import { AppDispatch } from "../../redux/store";
 import CardChanel from "../../UI/CardChanel";
 import CardKey from "../../UI/CardKey";
+import SkeletonComponent from "../../UI/SceletonComponets";
 import styles from "./Cards.module.css";
 
 const cardItem = [
@@ -36,6 +37,7 @@ const CardsKey = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const cardServer = useSelector(selectors.information.SelectInfo);
+  const isLoading = useSelector(selectors.information.SelectPending);
 
   useEffect(() => {
     dispatch(thunks.telegramAkk.getListTelegram());
@@ -77,14 +79,16 @@ const CardsKey = () => {
 
   return (
     <>
-      {cardServer?.map((item, key) => (
-        <CardChanel
-          id={item.id}
-          idTrub={item.truba_id}
-          desctext={item.text}
-          key={key}
-        />
-      ))}
+      {isLoading
+        ? [...Array(30)].map((item, index) => <SkeletonComponent key={index} />)
+        : cardServer?.map((item, key) => (
+            <CardChanel
+              id={item.id}
+              idTrub={item.truba_id}
+              desctext={item.text}
+              key={key}
+            />
+          ))}
     </>
   );
 };

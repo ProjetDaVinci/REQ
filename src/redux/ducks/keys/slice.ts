@@ -31,6 +31,10 @@ const keys = createSlice({
     builder.addCase(getListKeys.rejected, () => {
       return initialState;
     });
+    builder.addCase(getListKeys.pending, (state) => {
+      state.isPending = true;
+    });
+
     builder.addCase(
       addKeys.fulfilled,
       (state, { payload }: PayloadAction<KlyuchevikiAnswer>) => {

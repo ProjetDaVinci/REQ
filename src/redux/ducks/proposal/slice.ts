@@ -31,6 +31,9 @@ const proposal = createSlice({
     builder.addCase(getProposalList.rejected, () => {
       return initialState;
     });
+    builder.addCase(getProposalList.pending, (state) => {
+      state.isPending = true;
+    });
 
     builder.addCase(
       updateProposal.fulfilled,

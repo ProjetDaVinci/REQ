@@ -7,7 +7,11 @@ export type KlyuchevikiItem = {
   exclude: string;
 };
 
-export type KlyuchevikiRes = { count: number; data: KlyuchevikiItem[] };
+export type KlyuchevikiRes = {
+  count: number;
+  data: KlyuchevikiItem[];
+  isPending: boolean;
+};
 
 export type KlyuchevikiQue = {
   name: string;

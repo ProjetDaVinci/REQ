@@ -756,6 +756,14 @@ progress {
   margin-top: var(--bs-gutter-y);
 }
 
+.row>svg {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  width: auto;
+  max-width: auto;
+}
+
 .col {
   flex: 1 0 0%;
 }

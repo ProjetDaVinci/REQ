@@ -13,7 +13,11 @@ export type ProposalItem = {
   found: string;
 };
 
-export type ProposalRes = { count: number; data: ProposalItem[] };
+export type ProposalRes = {
+  count: number;
+  data: ProposalItem[];
+  isPending: boolean;
+};
 
 export type ProposalREQ = {
   message: string;

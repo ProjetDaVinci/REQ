@@ -31,6 +31,9 @@ const info = createSlice({
     builder.addCase(getInfoList.rejected, () => {
       return initialState;
     });
+    builder.addCase(getInfoList.pending, (state) => {
+      state.isPending = true;
+    });
   },
 });
 
